@@ -10,7 +10,7 @@ export interface IProductCard {
 
 const ProductCard = ({ title, caption, price, image }: IProductCard) => {
   return (
-    <div className="bg-white rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform">
+    <div className="bg-white min-h-[344px] rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform">
       <div className="h-48 bg-gray-100 flex items-center justify-center">
         <img src={image} alt={title} className="object-contain h-full w-full" />
       </div>

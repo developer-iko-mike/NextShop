@@ -5,9 +5,15 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "./Container";
 
+interface INavItems {
+  name: string;
+  href: string;
+}
+
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Store", href: "/store" },
+  { name: "Your Basket", href: "/basket" },
 ];
 
 export default function Navbar() {
@@ -22,13 +28,14 @@ export default function Navbar() {
     >
       <Container>
         <nav className="flex items-center space-x-6 py-4">
-          {navItems.map((item) => {
-            const isActive = pathname === item.href;
+          {navItems.map(({ name, href }: INavItems) => {
+            const isActive =
+              href === "/" ? pathname === "/" : pathname.startsWith(href);
 
             return (
               <Link
-                key={item.href}
-                href={item.href}
+                key={href}
+                href={href}
                 className={
                   "text-base font-semibold px-4 py-2 rounded-md hover:text-white transition-colors duration-200 " +
                   (isActive
@@ -36,7 +43,7 @@ export default function Navbar() {
                     : "text-gray-800 hover:bg-[#68B984]/80")
                 }
               >
-                {item.name}
+                {name}
               </Link>
             );
           })}
