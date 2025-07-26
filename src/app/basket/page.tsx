@@ -1,14 +1,21 @@
+"use client"
 import React from 'react';
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
 import {IProductCard } from "@/Components/ProductCard";
+import useBasket , {BasketState} from "@/Components/contexts/basket"
 
 interface ICartItem extends IProductCard {
   quantity: number;
 }
 
 
+
 const Cart = () => {
+  const store = useBasket()
+
+  console.log(store)
+
   const items : ICartItem[] = [
     {
       id: 1,
@@ -44,8 +51,8 @@ const Cart = () => {
           <span className="text-lg font-bold text-green-600">$298.00</span>
         </div>
 
-        <button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl shadow transition-all duration-200">
-          Checkout
+        <button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl capitalize cursor-pointer shadow transition-all duration-200">
+          orderd now
         </button>
       </div>
     </div>
