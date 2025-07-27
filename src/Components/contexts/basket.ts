@@ -65,7 +65,6 @@ const useBasket = create<BasketState>()(
       }),
       {
         name: "basket",
-        version: 1,
       }
     )
   )
