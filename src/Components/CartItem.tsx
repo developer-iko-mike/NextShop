@@ -6,7 +6,7 @@ import useStoreBasket from "./contexts/userBasket";
 
 const CartItem = ({ id, title, caption, price, image, quantity }: ICartItem) => {
 
-  const {increaseQty , decreaseQty} = useBasket()
+  const {increaseQty , decreaseQty} = useStoreBasket()
 
   return (
     <Container>

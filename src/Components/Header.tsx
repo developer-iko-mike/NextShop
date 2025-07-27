@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "./Container";
+import useStoreBasket from "./contexts/userBasket";
 
 interface INavItems {
   name: string;
@@ -12,11 +13,11 @@ interface INavItems {
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Store", href: "/store" },
-  { name: "Your Basket", href: "/basket" }
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { basket } = useStoreBasket();
 
   return (
     <motion.header
@@ -36,7 +37,7 @@ export default function Navbar() {
                 key={href}
                 href={href}
                 className={
-                  "text-base font-semibold px-4 py-2 rounded-md hover:text-white transition-colors duration-200 " +
+                  "text-base font-semibold p-2 rounded-md hover:text-white transition-colors duration-200 " +
                   (isActive
                     ? "bg-[#68B984] text-white shadow-md"
                     : "text-gray-800 hover:bg-[#68B984]/80")
@@ -46,6 +47,19 @@ export default function Navbar() {
               </Link>
             );
           })}
+
+          <div className="relative">
+            {basket.length ? (
+              <>
+                <span className="rounded-full min-w-[33.25px] bg-emerald-300 text-white py-1 absolute -top-4 z-10 -right-8 flex justify-center items-center">
+                  {basket.length}
+                </span>
+                <div className="rounded-full bg-emerald-200 text-white p-3 absolute -top-[.75rem] z-0 -right-7 animate-ping"></div>
+              </>
+            ) : null}
+
+            <Link href="/basket">Your Basket</Link>
+          </div>
         </nav>
       </Container>
     </motion.header>

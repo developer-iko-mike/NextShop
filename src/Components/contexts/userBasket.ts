@@ -53,8 +53,8 @@ const useStoreBasket = create<IStore>()(
 
         decreaseQty: (id) =>
           set((state) => ({
-            basket: state.basket.map((item) =>
-              item.id === id ? { ...item, qty: item.qty - 1 } : item
+            basket: state.basket.map((item: {id : string , qty: number}) => 
+              item.id === id ? { ...item, qty: item.qty < 1 ? state.removeFromBasket(id) : item.qty - 1 } : item
             ),
           })),
         clearBasket: () => ({ basket: [] }),
