@@ -1,9 +1,11 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
 
-type Product = {
-  id: number;
+export type Product = {
+  id: string;
+  image: string;
   title: string;
+  caption: string;
   price: number;
   quantity: number;
 };
@@ -11,9 +13,9 @@ type Product = {
 export type BasketState = {
   basket: Product[];
   addToBasket: (product: Omit<Product, "quantity">) => void;
-  removeFromBasket: (id: number) => void;
-  increaseQty: (id: number) => void;
-  decreaseQty: (id: number) => void;
+  removeFromBasket: (id: string) => void;
+  increaseQty: (id: string) => void;
+  decreaseQty: (id: string) => void;
   clearBasket: () => void;
 };
 
@@ -27,7 +29,7 @@ const useBasket = create<BasketState>()(
             const isProductInBasket = state.basket.find(
               (item) => item.id === product.id
             );
-            if (isProductInBasket) {
+            if (isProductInBasket) { 
               return {
                 basket: state.basket.map((item) =>
                   item.id === product.id
@@ -57,7 +59,7 @@ const useBasket = create<BasketState>()(
               .map((item) =>
                 item.id === id ? { ...item, quantity: item.quantity - 1 } : item
               )
-              .filter((item) => item.quantity > 1),
+              .filter((item) => item.quantity > 0),
           })),
         clearBasket: () => set({ basket: [] }),
       }),

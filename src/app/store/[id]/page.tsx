@@ -1,5 +1,6 @@
 import Container from "@/Components/Container";
 import { IProductCard } from "@/Components/ProductCard";
+import AddToBasketButton from "@/Components/AddToBasketButton"
 import axios from "axios";
 
 interface Props {
@@ -12,8 +13,9 @@ export default async function ProductDetailPage({
   
   const { id } = params;
 
-  const response = await axios.get(`http://localhost:3001/product/${id}`);
-  const { image, title, caption, price }: IProductCard = response.data;
+  const res = await fetch(`http://localhost:3001/product/${id}`);
+  const data = await res.json()
+  const { image, title, caption, price }: IProductCard = await data;
 
   return (
     <Container>
@@ -29,9 +31,7 @@ export default async function ProductDetailPage({
           <h1 className="text-3xl font-bold text-gray-800">{title}</h1>
           <p className="text-gray-600 text-lg">{caption}</p>
           <p className="text-green-600 text-2xl font-semibold">$ {price}</p>
-          <button className="mt-4 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl transition duration-200 shadow font-bold cursor-pointer">
-            Add to product basket 🛒
-          </button>
+          <AddToBasketButton mainProduct={data}/>
         </div>
       </div>
     </Container>

@@ -1,11 +1,11 @@
 import React from 'react';
 
 export interface IProductCard {
-  id?: string | number,
+  id:  string,
   image: string | File,
   title: string,
   caption: string,
-  price?: number,
+  price: number,
 }
 
 const ProductCard = ({ title, caption, price, image }: IProductCard) => {

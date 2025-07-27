@@ -1,60 +1,52 @@
-"use client"
-import React from 'react';
+"use client";
+import React from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
-import {IProductCard } from "@/Components/ProductCard";
-import useBasket , {BasketState} from "@/Components/contexts/basket"
+import { IProductCard } from "@/Components/ProductCard";
+import useBasket, { BasketState } from "@/Components/contexts/basket";
 
-interface ICartItem extends IProductCard {
+export interface ICartItem extends IProductCard {
   quantity: number;
 }
 
-
-
 const Cart = () => {
-  const store = useBasket()
+  const { basket , clearBasket } = useBasket();
 
-  console.log(store)
+console.log(basket)
 
-  const items : ICartItem[] = [
-    {
-      id: 1,
-      title: "Apple AirPods Pro",
-      caption: "Noise-cancelling wireless earbuds",
-      price: 249,
-      image: "/store/airpad.webp",
-      quantity: 1,
-    },
-    {
-      id: 2,
-      title: "Xiaomi Mi Band 7",
-      caption: "Smart fitness tracker with heart rate monitor",
-      price: 49,
-      image: "/store/band.webp",
-      quantity: 1,
-    },
-  ];
+  const totalPrice : () => number = () => {
+    const result = basket.length ? basket.map(item => item.price).reduce((pre , curr) => pre + curr) : 0
+    return result
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-4">
-      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6">
-        <h2 className="text-2xl font-bold text-black mb-6">🛒 Shopping Cart</h2>
+      {basket.length ? (
+        <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6">
+          <h2 className="text-2xl font-bold text-black mb-6">
+            🛒 Shopping Cart
+          </h2>
 
-        <div className="space-y-4">
-          {items.map((item: ICartItem) => (
-            <CartItem key={item.id} {...item} />
-          ))}
+          <div className="space-y-4">
+            {basket.length && basket.map((item) => {
+              <CartItem key={item.id} {...item.id}/>
+            })}
+          </div>
+
+          <div className="flex justify-between items-center pt-6 border-t mt-6">
+            <span className="text-lg font-bold text-black">Total:</span>
+            <span className="text-lg font-bold text-green-600">${totalPrice()}</span>
+          </div>
+
+          <button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl capitalize cursor-pointer shadow transition-all duration-200">
+            orderd now
+          </button>
         </div>
-
-        <div className="flex justify-between items-center pt-6 border-t mt-6">
-          <span className="text-lg font-bold text-black">Total:</span>
-          <span className="text-lg font-bold text-green-600">$298.00</span>
-        </div>
-
-        <button className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl capitalize cursor-pointer shadow transition-all duration-200">
-          orderd now
-        </button>
-      </div>
+      ) : (
+        <h2 className="text-4xl font-bold text-black mb-6 text-center capitalize" onClick={clearBasket}>
+          🛒 your basket is empty
+        </h2>
+      )}
     </div>
   );
 };

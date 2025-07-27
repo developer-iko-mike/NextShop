@@ -1,12 +1,12 @@
+"use client";
 import Container from "@/Components/Container";
-import {IProductCard} from "@/Components/ProductCard"
- 
+import { ICartItem } from "@/app/basket/page";
+import useBasket from "@/Components/contexts/basket";
 
-interface CartItem extends IProductCard {
-  quantity: number;
-}
+const CartItem = ({ id, title, caption, price, image, quantity }: ICartItem) => {
 
-const CartItem = ({ id, title, caption, price, image, quantity }: CartItem) => {
+  const { increaseQty, decreaseQty } = useBasket();
+
   return (
     <Container>
       <div className="flex items-center justify-between">
@@ -20,19 +20,26 @@ const CartItem = ({ id, title, caption, price, image, quantity }: CartItem) => {
             <h3 className="text-lg font-semibold text-black">{title}</h3>
             <p className="text-sm text-black/60">{caption}</p>
             <p className="text-sm font-medium text-black mt-1">
-              ${typeof price === 'number' ? price.toFixed(2) : '0.00'} × {quantity}
+              ${typeof price === "number" ? price.toFixed(2) : "0.00"} ×
+              {quantity}
             </p>
           </div>
         </div>
 
         <div className="flex items-center gap-2">
-          <button className="w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 text-red-600 text-lg font-bold flex items-center justify-around active:bg-red-300">
+          <button
+            className="w-8 h-8 rounded-full bg-red-100 hover:bg-red-200 text-red-600 text-lg font-bold flex items-center justify-around active:bg-red-300"
+            onClick={() => decreaseQty(id)}
+          >
             –
           </button>
           <span className="w-6 text-center text-black font-semibold">
             {quantity}
           </span>
-          <button className="w-8 h-8 rounded-full bg-green-100 hover:bg-green-200 text-green-600 text-lg font-bold flex items-center justify-around active:bg-green-300">
+          <button
+            className="w-8 h-8 rounded-full bg-green-100 hover:bg-green-200 text-green-600 text-lg font-bold flex items-center justify-around active:bg-green-300"
+            onClick={() => increaseQty(id)}
+          >
             +
           </button>
         </div>
