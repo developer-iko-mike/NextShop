@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,7 +12,7 @@ interface INavItems {
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Store", href: "/store" },
-  { name: "Your Basket", href: "/basket" },
+  { name: "Your Basket", href: "/basket" }
 ];
 
 export default function Navbar() {

@@ -1,6 +1,7 @@
 import Container from "@/Components/Container";
 import { IProductCard } from "@/Components/ProductCard";
 import AddToBasketButton from "@/Components/AddToBasketButton"
+
 export default async function ProductDetailPage({
   params,
 }: { params: { id: string } }) {

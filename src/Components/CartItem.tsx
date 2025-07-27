@@ -1,11 +1,12 @@
 "use client";
 import Container from "@/Components/Container";
 import { ICartItem } from "@/app/basket/page";
-import useBasket from "@/Components/contexts/basket";
+import useBasket from "./contexts/basket";
+import useStoreBasket from "./contexts/userBasket";
 
 const CartItem = ({ id, title, caption, price, image, quantity }: ICartItem) => {
 
-  const { increaseQty, decreaseQty } = useBasket();
+  const {increaseQty , decreaseQty} = useBasket()
 
   return (
     <Container>
@@ -20,7 +21,7 @@ const CartItem = ({ id, title, caption, price, image, quantity }: ICartItem) => 
             <h3 className="text-lg font-semibold text-black">{title}</h3>
             <p className="text-sm text-black/60">{caption}</p>
             <p className="text-sm font-medium text-black mt-1">
-              ${typeof price === "number" ? price.toFixed(2) : "0.00"} ×
+              ${typeof price === "number" ? (price * quantity).toFixed(2) : "0.00"} ×
               {quantity}
             </p>
           </div>

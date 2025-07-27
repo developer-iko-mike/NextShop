@@ -29,7 +29,7 @@ const useBasket = create<BasketState>()(
             const isProductInBasket = state.basket.find(
               (item) => item.id === product.id
             );
-            if (isProductInBasket) { 
+            if (isProductInBasket) {
               return {
                 basket: state.basket.map((item) =>
                   item.id === product.id
