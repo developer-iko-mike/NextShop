@@ -68,7 +68,7 @@ const useStoreBasket = create<IStore>()(
               };
             }
           }),
-        clearBasket: () => ({ basket: [] }),
+        clearBasket: () => set({ basket: [] })
       }),
       {
         name: "basket",
