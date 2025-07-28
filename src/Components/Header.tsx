@@ -49,18 +49,26 @@ export default function Navbar() {
           })}
 
           <div className="relative">
-            {basket.length ? (
-              <>
-                <span className="rounded-full min-w-[33.25px] bg-emerald-300 text-white py-1 absolute -top-4 z-10 -right-8 flex justify-center items-center">
-                  {basket.length}
-                </span>
-                <div className="rounded-full bg-emerald-200 text-white p-3 absolute -top-[.75rem] z-0 -right-7 animate-ping"></div>
-              </>
-            ) : null}
+  {basket.length ? (
+    <>
+      <span className="rounded-full min-w-[33.25px] bg-emerald-300 text-white py-1 absolute -top-4 -right-6 z-10 flex justify-center items-center">
+        {basket.length}
+      </span>
+      <div className="rounded-full w-[33.25px] h-[33.25px] bg-emerald-200 absolute -top-4 -right-6 z-0 animate-ping"></div>
+    </>
+  ) : null}
 
-            <Link href="/basket" className={`text-base font-semibold p-2 rounded-md hover:text-white transition-colors duration-200  ${pathname === "/basket"
-                    ? "bg-[#68B984] text-white shadow-md"
-                    : "text-gray-800 hover:bg-[#68B984]/80"}`}>Your Basket</Link>
+
+            <Link
+              href="/basket"
+              className={`text-base font-semibold p-2 rounded-md hover:text-white transition-colors duration-200  ${
+                pathname === "/basket"
+                  ? "bg-[#68B984] text-white shadow-md"
+                  : "text-gray-800 hover:bg-[#68B984]/80"
+              }`}
+            >
+              Your Basket
+            </Link>
           </div>
         </nav>
       </Container>

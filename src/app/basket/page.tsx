@@ -59,6 +59,7 @@ const Cart = () => {
   }, [basket]);
 
   const userCodeValidation = async () => {
+    if (discountCode){
     const res = await axios.get(
       `http://localhost:3001/discount?code=${discountCode}`
     );
@@ -76,6 +77,13 @@ const Cart = () => {
         autoClose: 3000,
       });
     }
+    } else {
+      toast.error("input value is empty :|", {
+        position: "bottom-right",
+        autoClose: 3000,
+      });
+    }
+
   };
 
   return (
