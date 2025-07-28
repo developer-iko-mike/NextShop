@@ -1,12 +1,17 @@
 "use client";
 import Container from "@/Components/Container";
 import { ICartItem } from "@/app/basket/page";
-import useBasket from "./contexts/basket";
 import useStoreBasket from "./contexts/userBasket";
 
-const CartItem = ({ id, title, caption, price, image, quantity }: ICartItem) => {
-
-  const {increaseQty , decreaseQty} = useStoreBasket()
+const CartItem = ({
+  id,
+  title,
+  caption,
+  price,
+  image,
+  quantity,
+}: ICartItem) => {
+  const { increaseQty, decreaseQty, removeFromBasket } = useStoreBasket();
 
   return (
     <Container>
@@ -21,11 +26,21 @@ const CartItem = ({ id, title, caption, price, image, quantity }: ICartItem) => 
             <h3 className="text-lg font-semibold text-black">{title}</h3>
             <p className="text-sm text-black/60">{caption}</p>
             <p className="text-sm font-medium text-black mt-1">
-              ${typeof price === "number" ? (price * quantity).toFixed(2) : "0.00"} ×
-              {quantity}
+              $
+              {typeof price === "number"
+                ? (price * quantity).toFixed(2)
+                : "0.00"}{" "}
+              ×{quantity}
             </p>
           </div>
         </div>
+
+        <button
+          onClick={() => removeFromBasket(id)}
+          className="bg-red-100 duration-150 hover:bg-red-200 hover:text-rose-600 active:rounded-xl active:scale-90 text-red-600 rounded-lg px-4 py-2 capitalize cursor-pointer text-md"
+        >
+          remove
+        </button>
 
         <div className="flex items-center gap-2">
           <button

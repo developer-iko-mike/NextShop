@@ -32,7 +32,7 @@ export default async function ProductDetailPage({
           <h1 className="text-3xl font-bold text-gray-800">{product.title}</h1>
           <p className="text-gray-600 text-lg">{product.caption}</p>
           <p className="text-green-600 text-2xl font-semibold">$ {product.price}</p>
-          <AddToBasketButton {...product} />
+          <AddToBasketButton id={id} />
         </div>
       </div>
     </Container>

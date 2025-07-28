@@ -70,5 +70,10 @@
       "price": 399,
       "image": "/store/watch.webp"
     }
+  ],
+  "discound": [
+    { "id": 2, "code": "DoitShitJustDoit", "precentCount": 15 },
+    { "id": 3, "code": "M-A-R-isComing", "precentCount": 20 },
+    { "id": 1, "code": "LeachMobIsTheBest", "precentCount": 30 }
   ]
 }
