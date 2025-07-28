@@ -4,20 +4,21 @@ import Container from "@/Components/Container";
 import { toast, ToastContainer } from "react-toastify";
 import CustomToast from "@/Components/CustomToast";
 import axios from "axios";
+import Link from "next/link";
 
-interface ProductForm {
-  title: string;
-  caption: string;
-  price: string;
-  image: string;
+interface UserForm {
+  username: string;
+  phone: string;
+  gmail: string;
+  password: string;
 }
 
-const AdminPanel = () => {
-  const [form, setForm] = useState<ProductForm>({
-    title: "",
-    caption: "",
-    price: "",
-    image: "",
+const Register = () => {
+  const [form, setForm] = useState<UserForm>({
+    username: "",
+    phone: "",
+    gmail: "",
+    password: "",
   });
 
   const handleChange = (e: ChangeEvent | ChangeEvent<HTMLInputElement>) => {
@@ -30,40 +31,37 @@ const AdminPanel = () => {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (isNaN(+form.price)) {
-      toast.warning("your feild price is not a number", {
+
+    if (isNaN(+form.phone)) {
+      toast.warning("your phone numbre is not a number", {
         position: "bottom-right",
         autoClose: 3000,
         draggable: true,
       });
     } else {
-      await axios({
-        url: "http://localhost:3001/product",
+      console.log(form);
+      axios({
+        url: "http://localhost:3001/users",
         method: "POST",
         data: {
-          title: form.title,
-          caption: form.caption,
-          price: +form.price,
-          image: form.image,
+          username: form.username,
+          phone: form.phone,
+          gmail: form.gmail,
+          password: form.password,
+          basket: [],
         },
       });
-      toast.success(
-        <CustomToast
-          title="product added to database successfully"
-          TiTleLink="view store"
-          href="/store"
-        />,
-        {
-          position: "bottom-right",
-          autoClose: 3000,
-          draggable: true,
-        }
-      );
+      // num.slice(1) // 098 ... => 98 ...
+      toast.success("logged in with successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        draggable: true,
+      });
       setForm({
-        title: "",
-        caption: "",
-        price: "",
-        image: "",
+        username: "",
+        phone: "",
+        gmail: "",
+        password: "",
       });
     }
   };
@@ -82,48 +80,61 @@ const AdminPanel = () => {
           <div>
             <input
               type="text"
-              name="title"
-              placeholder="Enter product title"
-              value={form.title}
+              name="username"
+              placeholder="Enter your username *"
+              value={form.username}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-sky-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
+          <div className="relative">
+            <span className="absolute bottom-2.5 left-1.5">+98 |</span>
+            <input
+              type="text"
+              name="phone"
+              placeholder="Enter your phone *"
+              value={form.phone}
+              onChange={handleChange}
+              className="w-full pr-4 pl-12 py-2 border border-sky-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              minLength={10}
+              maxLength={10}
               required
             />
           </div>
           <div>
             <input
               type="text"
-              name="price"
-              placeholder="Enter product price"
-              value={form.price.toLocaleString()}
+              name="password"
+              placeholder="Enter your password *"
+              value={form.password}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-sky-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              minLength={6}
+              maxLength={16}
               required
-              min="0"
             />
           </div>
           <div>
             <input
               type="text"
-              name="image"
-              placeholder="Enter image link"
-              value={form.image}
+              name="gmail"
+              placeholder="Enter your email address"
+              value={form.gmail}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-sky-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
             />
           </div>
-          <div>
-            <textarea
-              type="text"
-              name="caption"
-              placeholder="Enter product caption"
-              value={form.caption}
-              onChange={handleChange}
-              className="w-full px-4 py-2 border border-sky-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
-              required
-            />
+          <div className="flex justify-center gap-2.5">
+            <p className="capitalize">alerdy have account ? </p>
+            <Link
+              href="/login"
+              className="text-sky-400 duration-150 hover:underline hover:text-sky-600"
+            >
+              Login
+            </Link>
           </div>
+
           <button
             type="submit"
             className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 transition cursor-pointer"
@@ -136,4 +147,4 @@ const AdminPanel = () => {
   );
 };
 
-export default AdminPanel;
+export default Register;

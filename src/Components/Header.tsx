@@ -14,6 +14,8 @@ const navItems = [
   { name: "Home", href: "/" },
   { name: "Store", href: "/store" },
   { name: "Admin Panel", href: "/CMS" },
+  { name: "Login", href: "/login" },
+  { name: "Register", href: "/register" },
 ];
 
 export default function Navbar() {
