@@ -29,32 +29,32 @@ const Cart = () => {
   const calculatoringTotal = () =>
     mainBasket.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
-  useEffect(() => {
-    const getProductData = async () => {
-      try {
-        const res = await axios.get("http://localhost:3001/product");
-        if (res.status === 200) {
-          const result = basket
-            .map((basketItem: IProduct) => {
-              const dataItem = res.data.find(
-                (d: IProduct) => d.id === basketItem.id
-              );
-              if (dataItem) {
-                return {
-                  ...dataItem,
-                  quantity: basketItem.qty,
-                };
-              }
-              return null;
-            })
-            .filter((item: ICartItem) => item !== null);
-          setMainBasket(result);
-        }
-      } catch (err) {
-        console.error("error in get product info:", err);
+  const getProductData = async () => {
+    try {
+      const res = await axios.get("http://localhost:3001/product");
+      if (res.status === 200) {
+        const result = basket
+          .map((basketItem: IProduct) => {
+            const dataItem = res.data.find(
+              (d: IProduct) => d.id === basketItem.id
+            );
+            if (dataItem) {
+              return {
+                ...dataItem,
+                quantity: basketItem.qty,
+              };
+            }
+            return null;
+          })
+          .filter((item: ICartItem) => item !== null);
+        setMainBasket(result);
       }
-    };
+    } catch (err) {
+      console.error("error in get product info:", err);
+    }
+  };
 
+  useEffect(() => {
     getProductData();
   }, [basket]);
 
@@ -85,6 +85,11 @@ const Cart = () => {
     }
 
   };
+
+  const handleOrderedUser = async () => {
+    console.log(mainBasket)
+    clearBasket()
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 pt-10">
@@ -153,7 +158,7 @@ const Cart = () => {
 
             <button
               className="w-full mt-4 bg-green-600 hover:bg-green-700 text-white font-medium py-3 rounded-xl capitalize cursor-pointer shadow transition-all duration-200"
-              onClick={clearBasket}
+              onClick={handleOrderedUser}
             >
               order now
             </button>

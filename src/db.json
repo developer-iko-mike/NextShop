@@ -69,11 +69,38 @@
       "caption": "Smartwatch with health tracking and GPS",
       "price": 399,
       "image": "/store/watch.webp"
+    },
+    {
+      "id": "11",
+      "title": "tablet",
+      "caption": "is the best tablet",
+      "price": 2000,
+      "image": "/newProduct/tablet.webp"
+    },
+    {
+      "id": "12",
+      "title": "tv",
+      "caption": "big height 43 inch ",
+      "price": 4000,
+      "image": "/newProduct/tv.jpg"
     }
   ],
   "discount": [
-    { "id": "1", "code": "DoitShitJustDoit", "precentCount": 15 },
-    { "id": "2", "code": "M-A-R-isComing", "precentCount": 20 },
-    { "id": "3", "code": "LeachMobIsTheBest", "precentCount": 30 }
-  ]
+    {
+      "id": "1",
+      "code": "DoitShitJustDoit",
+      "precentCount": 15
+    },
+    {
+      "id": "2",
+      "code": "M-A-R-isComing",
+      "precentCount": 20
+    },
+    {
+      "id": "3",
+      "code": "LeachMobIsTheBest",
+      "precentCount": 30
+    }
+  ],
+  "orders": []
 }
