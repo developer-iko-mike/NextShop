@@ -50,13 +50,24 @@ const useStoreBasket = create<IStore>()(
               item.id === id ? { ...item, qty: item.qty + 1 } : item
             ),
           })),
-
         decreaseQty: (id) =>
-          set((state) => ({
-            basket: state.basket.map((item: {id : string , qty: number}) => 
-              item.id === id ? { ...item, qty: item.qty < 1 ? state.removeFromBasket(id) : item.qty - 1 } : item
-            ),
-          })),
+          set((state) => {
+            const item = state.basket.find((item) => item.id === id);
+            if (!item) return { basket: state.basket };
+            if (item.qty <= 1) {
+              // Remove item if qty is 1 or less
+              return {
+                basket: state.basket.filter((item) => item.id !== id),
+              };
+            } else {
+              // Decrease qty by 1
+              return {
+                basket: state.basket.map((item) =>
+                  item.id === id ? { ...item, qty: item.qty - 1 } : item
+                ),
+              };
+            }
+          }),
         clearBasket: () => ({ basket: [] }),
       }),
       {
