@@ -12,7 +12,7 @@ const ProductsPage = async () => {
   return (
     <Container>
     <div className="min-h-screen px-6 py-10">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">🛒 محصولات ما</h1>
+      <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">My Product 🛒</h1>
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         
         {response.data.map((product: IProductCard) => (

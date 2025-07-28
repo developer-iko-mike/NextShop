@@ -6,6 +6,7 @@ import { IProductCard } from "@/Components/ProductCard";
 import useStoreBasket, { IProduct } from "@/Components/contexts/userBasket";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
+import Link from "next/link";
 
 export interface ICartItem extends IProductCard {
   quantity: number;
@@ -78,7 +79,7 @@ const Cart = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 py-10 px-4">
+    <div className="min-h-screen bg-gray-100 pt-10">
       <ToastContainer />
       <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6">
         <h2 className="text-2xl font-bold text-black mb-6">🛒 Shopping Cart</h2>
@@ -150,8 +151,9 @@ const Cart = () => {
             </button>
           </>
         ) : (
-          <h2 className="text-4xl font-bold text-black mb-6 text-center capitalize">
-            🛒 your basket is empty
+          <h2 className="mb-6 text-center capitalize flex flex-col gap-3">
+            <span className="text-4xl font-bold ">your basket is empty</span> 
+            <Link href={"/store"} className="text-blue-400 hover:underline text-2xl">Back to Store</Link>
           </h2>
         )}
       </div>

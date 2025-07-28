@@ -58,7 +58,9 @@ export default function Navbar() {
               </>
             ) : null}
 
-            <Link href="/basket">Your Basket</Link>
+            <Link href="/basket" className={`text-base font-semibold p-2 rounded-md hover:text-white transition-colors duration-200  ${pathname === "/basket"
+                    ? "bg-[#68B984] text-white shadow-md"
+                    : "text-gray-800 hover:bg-[#68B984]/80"}`}>Your Basket</Link>
           </div>
         </nav>
       </Container>

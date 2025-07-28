@@ -1,4 +1,3 @@
-"use client";
 import Container from "@/Components/Container";
 import { ICartItem } from "@/app/basket/page";
 import useStoreBasket from "./contexts/userBasket";
