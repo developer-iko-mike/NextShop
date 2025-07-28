@@ -13,6 +13,7 @@ interface INavItems {
 const navItems = [
   { name: "Home", href: "/" },
   { name: "Store", href: "/store" },
+  { name: "Admin Panel", href: "/CMS" },
 ];
 
 export default function Navbar() {

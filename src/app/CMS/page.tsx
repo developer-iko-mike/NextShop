@@ -6,63 +6,59 @@ import Link from "next/link";
 import CustomToast from "@/Components/CustomToast";
 
 interface ProductForm {
-  id: string;
   title: string;
   caption: string;
-  price: number;
+  price: string;
   image: File | null;
 }
 
 const AdminPanel = () => {
   const [form, setForm] = useState<ProductForm>({
-    id: "",
     title: "",
     caption: "",
-    price: 0,
+    price: "",
     image: null,
   });
 
   const [preview, setPreview] = useState<string | null>(null);
 
   const handleChange = (e: ChangeEvent | ChangeEvent<HTMLInputElement>) => {
-    const {name , value} = e.target
+    const { name, value } = e.target;
     setForm({
       ...form,
-      [name]: value
-    })
+      [name]: value,
+    });
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    console.log(form)
-    if (!form.title && !form.caption && !form.price && !form.image){
-    toast.error("please enter fulled the value",{
+    console.log(form);
+    if (isNaN(+form.price)) {
+      toast.warning("your feild price is not a number", {
         position: "bottom-right",
         autoClose: 3000,
         draggable: true,
-      }
-    );
+      });
     } else {
-    toast.success(
-      <CustomToast
-        title="product added to database successfully"
-        TiTleLink="view store"
-        href="/store"
-      />,
-      {
-        position: "bottom-right",
-        autoClose: 3000,
-        draggable: true,
-      }
-    );
-    setForm({
-      id: "",
-      title: "",
-      caption: "",
-      price: 0,
-      image: null,
-    });
-    setPreview(null);      
+      toast.success(
+        <CustomToast
+          title="product added to database successfully"
+          TiTleLink="view store"
+          href="/store"
+        />,
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+          draggable: true,
+        }
+      );
+      setForm({
+        title: "",
+        caption: "",
+        price: "",
+        image: null,
+      });
+      setPreview(null);
     }
   };
 
@@ -90,7 +86,7 @@ const AdminPanel = () => {
           </div>
           <div>
             <input
-              type="number"
+              type="text"
               name="price"
               placeholder="Enter product price"
               value={form.price.toLocaleString()}
@@ -122,9 +118,9 @@ const AdminPanel = () => {
             <input
               type="file"
               name="image"
-              accept="image/*"
+              // accept="image/*"
               onChange={handleChange}
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
+              className="w-full px-4 py-2 border rounded-lg cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-400 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
               required
             />
             {preview && (
