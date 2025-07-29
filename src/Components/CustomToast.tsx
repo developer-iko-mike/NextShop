@@ -11,8 +11,8 @@ const CustomToast = ({title , href , TiTleLink}: ICustomToast) => {
   return (
     <div>
       <Link className="ml-1 flex flex-wrap" href={href}>
-        <span>{title}</span>
-        <span className="text-sky-400 duration-150 hover:underline hover:text-sky-700">
+        <span className="mr-2 inline-block">{title}</span>
+        <span className="text-sky-400 inline-block duration-150 hover:underline hover:text-sky-700">
           {TiTleLink}
         </span>
       </Link>
