@@ -4,23 +4,29 @@ export type ChProps = Readonly<{
   children: ReactNode;
 }>;
 
-// component > contexts > ProductCard :
+// component > store > ProductCard :
 interface IProductCard {
   id: string;
   image: string | File;
   title: string;
   caption: string;
   price: number;
+  qty: number;
 }
 
-// component > contexts > authUser :
+export interface BasketItem {
+  id: string;
+  qty: number;
+}
+
+// component > store > authUser :
 export interface User {
   id: string;
   username: string;
   phone: string;
   gmail: string;
   password: string;
-  basket: IProductCard[] | [];
+  basket: BasketItem[];
 }
 
 export interface IProduct {

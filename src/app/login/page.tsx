@@ -35,21 +35,21 @@ const Login = () => {
           data.filter((item: User) => item.gmail === loginId)[0] || null;
         if (Boolean(usernameAuth) && handleCheckPassword(usernameAuth)) {
           setUser(usernameAuth)
-          toast.success("you are login now with usernameAuth", {
+          toast.success(<CustomToast title="you are login now with usernameAuth" TiTleLink="view store" href="/store"/>, {
             position: "bottom-right",
             autoClose: 3000,
             draggable: true,
           });
         } else if (Boolean(phoneAuth) && handleCheckPassword(phoneAuth)) {
           setUser(phoneAuth)
-          toast.success("you are login now with phoneAuth", {
+          toast.success(<CustomToast title="you are login now with phoneAuth" TiTleLink="view store" href="/store"/>, {
             position: "bottom-right",
             autoClose: 3000,
             draggable: true,
           });
         } else if (Boolean(emailAuth) && handleCheckPassword(emailAuth)) {
           setUser(emailAuth)
-          toast.success("you are login now with emailAuth", {
+          toast.success(<CustomToast title="you are login now with emailAuth" TiTleLink="view store" href="/store"/>, {
             position: "bottom-right",
             autoClose: 3000,
             draggable: true,

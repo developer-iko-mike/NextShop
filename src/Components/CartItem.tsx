@@ -12,6 +12,8 @@ const CartItem = ({
 }: ICartItem) => {
   const { increaseQty, decreaseQty, removeFromBasket } = useUserStore();
 
+  console.log(id)
+
   return (
     <Container>
       <div className="flex items-center justify-between">

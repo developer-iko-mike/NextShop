@@ -1,13 +1,12 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-import { IProduct, User } from "../types";
+import { User } from "../types";
 
 interface IStore {
   user: User | null;
   setUser: (user: User) => void;
   logout: () => void;
 
-  basket: IProduct[];
   addProduct: (id: string) => void;
   removeFromBasket: (id: string) => void;
   increaseQty: (id: string) => void;
@@ -18,57 +17,67 @@ interface IStore {
 const useUserStore = create<IStore>()(
   devtools(
     persist(
-      (set) => ({
+      (set, get) => ({
         user: null,
-        setUser: (user) => set({ user }),
-        logout: () => set({ user: null, basket: [] }),
 
-        basket: [],
-        addProduct: (id) =>
-          set((state) => {
-            const existing = state.basket.find((item) => item.id === id);
-            if (existing) {
-              return {
-                basket: state.basket.map((item) =>
-                  item.id === id ? { ...item, qty: item.qty + 1 } : item
-                ),
-              };
-            } else {
-              return {
-                basket: [...state.basket, { id, qty: 1 }],
-              };
-            }
-          }),
-        removeFromBasket: (id) =>
-          set((state) => ({
-            basket: state.basket.filter((item) => item.id !== id),
-          })),
-        increaseQty: (id) =>
-          set((state) => ({
-            basket: state.basket.map((item) =>
-              item.id === id ? { ...item, qty: item.qty + 1 } : item
-            ),
-          })),
-        decreaseQty: (id) =>
-          set((state) => {
-            const item = state.basket.find((item) => item.id === id);
-            if (!item) return { basket: state.basket };
-            if (item.qty <= 1) {
-              return {
-                basket: state.basket.filter((item) => item.id !== id),
-              };
-            } else {
-              return {
-                basket: state.basket.map((item) =>
-                  item.id === id ? { ...item, qty: item.qty - 1 } : item
-                ),
-              };
-            }
-          }),
-        clearBasket: () => set({ basket: [] }),
+        setUser: (user) => set({ user }),
+        logout: () => set({ user: null }),
+
+        addProduct: (id) => {
+          const user = get().user;
+          if (!user) return;
+
+          const exists = user.basket.find((item) => item.id === id);
+          const updatedBasket = exists
+            ? user.basket.map((item) =>
+                item.id === id ? { ...item, qty: item.qty + 1 } : item
+              )
+            : [...user.basket, { id, qty: 1 }];
+
+          set({ user: { ...user, basket: updatedBasket } });
+        },
+
+        removeFromBasket: (id) => {
+          const user = get().user;
+          if (!user) return;
+
+          const updatedBasket = user.basket.filter((item) => item.id !== id);
+          set({ user: { ...user, basket: updatedBasket } });
+        },
+
+        increaseQty: (id) => {
+          const user = get().user;
+          if (!user) return;
+
+          const updatedBasket = user.basket.map((item) =>
+            item.id === id ? { ...item, qty: item.qty + 1 } : item
+          );
+
+          set({ user: { ...user, basket: updatedBasket } });
+        },
+
+        decreaseQty: (id) => {
+          const user = get().user;
+          if (!user) return;
+
+          const updatedBasket = user.basket
+            .map((item) =>
+              item.id === id ? { ...item, qty: item.qty - 1 } : item
+            )
+            .filter((item) => item.qty > 0);
+
+          set({ user: { ...user, basket: updatedBasket } });
+        },
+
+        clearBasket: () => {
+          const user = get().user;
+          if (!user) return;
+
+          set({ user: { ...user, basket: [] } });
+        },
       }),
       {
-        name: "user-store", // اسم برای localStorage
+        name: "user-store",
       }
     )
   )

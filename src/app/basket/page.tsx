@@ -8,9 +8,8 @@ import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
 
-
 const Cart = () => {
-  const { basket, clearBasket } = useUserStore();
+  const { user, clearBasket } = useUserStore();
 
   const [mainBasket, setMainBasket] = useState<ICartItem[]>([]);
   const [discountCode, setDiscountCode] = useState<string>("");
@@ -24,7 +23,7 @@ const Cart = () => {
     try {
       const res = await axios.get("http://localhost:3001/product");
       if (res.status === 200) {
-        const result = basket
+        const result = user?.basket
           .map((basketItem: IProduct) => {
             const dataItem = res.data.find(
               (d: IProduct) => d.id === basketItem.id
@@ -38,7 +37,7 @@ const Cart = () => {
             return null;
           })
           .filter((item: ICartItem) => item !== null);
-        setMainBasket(result);
+        setMainBasket(result || []);
       }
     } catch (err) {
       console.error("error in get product info:", err);
@@ -47,40 +46,39 @@ const Cart = () => {
 
   useEffect(() => {
     getProductData();
-  }, [basket]);
+  }, [user?.basket.length]);
 
   const userCodeValidation = async () => {
-    if (discountCode){
-    const res = await axios.get(
-      `http://localhost:3001/discount?code=${discountCode}`
-    );
-    const discountData: IDiscount = res.data[0];
-    if (Boolean(discountData)) {
-      const beforeDiscountTotal: number = calculatoringTotal();
-      const calcingCashOff =
-        beforeDiscountTotal * (discountData.precentCount / 100);
-      const finalTotal = beforeDiscountTotal - calcingCashOff;
-      setDiscount(Number(calcingCashOff.toFixed(2)));
-      setFinalTotal(Number(finalTotal.toFixed(2)));
-    } else {
-      toast.error("Invalid discount code", {
-        position: "bottom-right",
-        autoClose: 3000,
-      });
-    }
+    if (discountCode) {
+      const res = await axios.get(
+        `http://localhost:3001/discount?code=${discountCode}`
+      );
+      const discountData: IDiscount = res.data[0];
+      if (Boolean(discountData)) {
+        const beforeDiscountTotal: number = calculatoringTotal();
+        const calcingCashOff =
+          beforeDiscountTotal * (discountData.precentCount / 100);
+        const finalTotal = beforeDiscountTotal - calcingCashOff;
+        setDiscount(Number(calcingCashOff.toFixed(2)));
+        setFinalTotal(Number(finalTotal.toFixed(2)));
+      } else {
+        toast.error("Invalid discount code", {
+          position: "bottom-right",
+          autoClose: 3000,
+        });
+      }
     } else {
       toast.error("input value is empty :|", {
         position: "bottom-right",
         autoClose: 3000,
       });
     }
-
   };
 
   const handleOrderedUser = async () => {
-    console.log(mainBasket)
-    clearBasket()
-  }
+    console.log(mainBasket);
+    clearBasket();
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 pt-10">
@@ -88,7 +86,7 @@ const Cart = () => {
       <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6">
         <h2 className="text-2xl font-bold text-black mb-6">🛒 Shopping Cart</h2>
 
-        {basket.length ? (
+        {user?.basket.length ? (
           <>
             <div className="space-y-4">
               {mainBasket.map((item) => (
@@ -156,8 +154,13 @@ const Cart = () => {
           </>
         ) : (
           <h2 className="mb-6 text-center capitalize flex flex-col gap-3">
-            <span className="text-4xl font-bold ">your basket is empty</span> 
-            <Link href={"/store"} className="text-blue-400 hover:underline text-2xl">Back to Store</Link>
+            <span className="text-4xl font-bold ">your basket is empty</span>
+            <Link
+              href={"/store"}
+              className="text-blue-400 hover:underline text-2xl"
+            >
+              Back to Store
+            </Link>
           </h2>
         )}
       </div>
