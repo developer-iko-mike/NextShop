@@ -1,9 +1,8 @@
 import React from 'react';
 import Header from './Header';
+import { ChProps } from './types';
 
-export interface iChildren { children: React.ReactNode }
-
-const Layout = ({children}: iChildren) => {
+const Layout = ({children}: ChProps) => {
   return (
     <>
         <Header/>

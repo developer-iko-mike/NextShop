@@ -6,7 +6,7 @@ import axios from "axios";
 import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useUserStore } from "@/Components/contexts/authUser";
+import useUserStore from "@/Components/stores/useUserStore";
 
 const Register = () => {
   const { setUser } = useUserStore();

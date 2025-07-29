@@ -1,6 +1,6 @@
 import Container from "@/Components/Container";
 import { ICartItem } from "@/app/basket/page";
-import useStoreBasket from "./contexts/userBasket";
+import useStoreBasket from "./stores/userBasket";
 
 const CartItem = ({
   id,

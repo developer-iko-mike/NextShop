@@ -3,14 +3,14 @@ import React, { useEffect, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
 import { IProduct, ICartItem, IDiscount } from "@/Components/types";
-import useStoreBasket from "@/Components/contexts/userBasket";
+import useUserStore from "@/Components/stores/useUserStore";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
 
 
 const Cart = () => {
-  const { basket, clearBasket } = useStoreBasket();
+  const { basket, clearBasket } = useUserStore();
 
   const [mainBasket, setMainBasket] = useState<ICartItem[]>([]);
   const [discountCode, setDiscountCode] = useState<string>("");

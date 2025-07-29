@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "./Container";
-import useStoreBasket from "./contexts/userBasket";
+import useStoreBasket from "./stores/userBasket";
 
 interface INavItems {
   name: string;

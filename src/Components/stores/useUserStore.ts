@@ -1,10 +1,12 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
-import { IProduct } from "../types";
-
-
+import { IProduct, User } from "../types";
 
 interface IStore {
+  user: User | null;
+  setUser: (user: User) => void;
+  logout: () => void;
+
   basket: IProduct[];
   addProduct: (id: string) => void;
   removeFromBasket: (id: string) => void;
@@ -13,17 +15,19 @@ interface IStore {
   clearBasket: () => void;
 }
 
-const useStoreBasket = create<IStore>()(
+const useUserStore = create<IStore>()(
   devtools(
     persist(
       (set) => ({
+        user: null,
+        setUser: (user) => set({ user }),
+        logout: () => set({ user: null, basket: [] }),
+
         basket: [],
         addProduct: (id) =>
           set((state) => {
-            const isProductInBasket = state.basket.find(
-              (item) => item.id === id
-            );
-            if (isProductInBasket) {
+            const existing = state.basket.find((item) => item.id === id);
+            if (existing) {
               return {
                 basket: state.basket.map((item) =>
                   item.id === id ? { ...item, qty: item.qty + 1 } : item
@@ -31,17 +35,14 @@ const useStoreBasket = create<IStore>()(
               };
             } else {
               return {
-                basket: [...state.basket, { id: id, qty: 1 }],
+                basket: [...state.basket, { id, qty: 1 }],
               };
             }
           }),
         removeFromBasket: (id) =>
-          set((state) => {
-            const newBasket = state.basket.filter((item) => item.id !== id);
-            return {
-              basket: newBasket,
-            };
-          }),
+          set((state) => ({
+            basket: state.basket.filter((item) => item.id !== id),
+          })),
         increaseQty: (id) =>
           set((state) => ({
             basket: state.basket.map((item) =>
@@ -53,12 +54,10 @@ const useStoreBasket = create<IStore>()(
             const item = state.basket.find((item) => item.id === id);
             if (!item) return { basket: state.basket };
             if (item.qty <= 1) {
-              // Remove item if qty is 1 or less
               return {
                 basket: state.basket.filter((item) => item.id !== id),
               };
             } else {
-              // Decrease qty by 1
               return {
                 basket: state.basket.map((item) =>
                   item.id === id ? { ...item, qty: item.qty - 1 } : item
@@ -66,13 +65,13 @@ const useStoreBasket = create<IStore>()(
               };
             }
           }),
-        clearBasket: () => set({ basket: [] })
+        clearBasket: () => set({ basket: [] }),
       }),
       {
-        name: "basket",
+        name: "user-store", // اسم برای localStorage
       }
     )
   )
 );
 
-export default useStoreBasket;
+export default useUserStore;

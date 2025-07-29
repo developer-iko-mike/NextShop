@@ -1,8 +1,6 @@
 import React from "react";
 import IProductCard from "./types";
 
-
-
 const ProductCard = ({ title, caption, price, image }: IProductCard) => {
   return (
     <div className="bg-white min-h-[344px] rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform">

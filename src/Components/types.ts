@@ -1,4 +1,8 @@
-import {ChangeEvent} from "react";
+import {ChangeEvent, ReactNode} from "react";
+
+export type ChProps = Readonly<{
+  children: ReactNode;
+}>;
 
 // component > contexts > ProductCard :
 interface IProductCard {
