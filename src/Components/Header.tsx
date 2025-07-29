@@ -17,40 +17,40 @@ const navItems: INavItems[] = [
   { name: "Admin Panel", href: "/CMS" },
 ];
 
+export const modalBackdrop = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 0.3 } },
+  exit: { opacity: 0, transition: { duration: 0.2 } },
+};
+
+export const modalContent: Variants = {
+  hidden: {
+    y: -30,
+    opacity: 0,
+    scale: 0.9,
+  },
+  visible: {
+    y: 0,
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+      type: "spring",
+      damping: 12,
+      stiffness: 120,
+    },
+  },
+  exit: {
+    y: 30,
+    opacity: 0,
+    scale: 0.9,
+    transition: { duration: 0.3, ease: "easeIn" },
+  },
+};
 export default function Navbar() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
-  const modalBackdrop = {
-    hidden: { opacity: 0 },
-    visible: { opacity: 1, transition: { duration: 0.3 } },
-    exit: { opacity: 0, transition: { duration: 0.2 } },
-  };
-
-  const modalContent: Variants = {
-    hidden: {
-      y: -30,
-      opacity: 0,
-      scale: 0.9,
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-        type: "spring",
-        damping: 12,
-        stiffness: 120,
-      },
-    },
-    exit: {
-      y: 30,
-      opacity: 0,
-      scale: 0.9,
-      transition: { duration: 0.3, ease: "easeIn" },
-    },
-  };
 
   const buttonVariant: Variants = {
     initial: {

@@ -5,6 +5,7 @@ import { toast, ToastContainer } from "react-toastify";
 import CustomToast from "@/Components/CustomToast";
 import axios from "axios";
 import { Che, ProductForm } from "@/Components/types";
+import CMSQuiz from "@/Components/CMSQuiz";
 
 const AdminPanel = () => {
   const [form, setForm] = useState<ProductForm>({
@@ -69,6 +70,7 @@ const AdminPanel = () => {
         <h1 className="text-3xl font-extrabold mb-8 text-gray-800">
           Add New Product
         </h1>
+        <CMSQuiz title="Need Edit Or Delete Product ?" href="/CMS/edit-delete"/>
         <form
           onSubmit={handleSubmit}
           className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6"

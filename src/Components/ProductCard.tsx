@@ -1,7 +1,17 @@
-import React from "react";
+import React, { ReactNode } from "react";
 import IProductCard from "./types";
 
-const ProductCard = ({ title, caption, price, image }: IProductCard) => {
+interface IProductItem extends IProductCard {
+  children?: ReactNode;
+}
+
+const ProductCard = ({
+  title,
+  caption,
+  price,
+  image,
+  children,
+}: IProductItem) => {
   return (
     <div className="bg-white min-h-[344px] rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform">
       <div className="h-48 bg-gray-100 flex items-center justify-center">
@@ -10,7 +20,10 @@ const ProductCard = ({ title, caption, price, image }: IProductCard) => {
       <div className="p-4">
         <h3 className="text-xl font-bold text-gray-800">{title}</h3>
         <p className="text-gray-600 my-2">{caption}</p>
-        <div className="text-lg font-semibold text-green-600">${price}</div>
+        <div className="flex items-center justify-between">
+          <span className="text-lg font-semibold text-green-600">${price}</span>
+          {children ? <>{children}</> : null}
+        </div>
       </div>
     </div>
   );
