@@ -4,7 +4,7 @@ import Layout from "@/Components/Layout";
 import { ChProps } from "@/Components/types";
 
 export const metadata: Metadata = {
-  title: "NextStore Episdoe",
+  title: "LeachStore",
 };
 
 export default function RootLayout({

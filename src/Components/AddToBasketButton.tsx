@@ -1,12 +1,12 @@
 "use client";
 import React from "react";
-import useBasket from "@/Components/contexts/userBasket";
+import useUserStore from "@/Components/stores/useUserStore";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomToast from "./CustomToast";
 
 const AddToBasketButton = ({ id }: {id: string}) => {
-  const { addProduct } = useBasket();
+  const { addProduct } = useUserStore();
 
   const handleAdd = (id: string) => {
     addProduct(id);

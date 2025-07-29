@@ -1,6 +1,6 @@
 import Container from "@/Components/Container";
-import { ICartItem } from "@/app/basket/page";
-import useStoreBasket from "./stores/userBasket";
+import { ICartItem } from "@/Components/types";
+import useUserStore from "./stores/useUserStore";
 
 const CartItem = ({
   id,
@@ -10,7 +10,7 @@ const CartItem = ({
   image,
   quantity,
 }: ICartItem) => {
-  const { increaseQty, decreaseQty, removeFromBasket } = useStoreBasket();
+  const { increaseQty, decreaseQty, removeFromBasket } = useUserStore();
 
   return (
     <Container>
