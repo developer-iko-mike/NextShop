@@ -1,5 +1,5 @@
 import Container from "@/Components/Container";
-import { IProductCard } from "@/Components/ProductCard";
+import  IProductCard from "@/Components/types";
 import AddToBasketButton from "@/Components/AddToBasketButton"
 
 export default async function ProductDetailPage({
@@ -9,8 +9,7 @@ export default async function ProductDetailPage({
   const res = await fetch(`http://localhost:3001/product/${id}`);
   const data = await res.json();
   
-  // اطمینان حاصل کنید که `data` شامل فیلدهای مورد نیاز است
-  const product = {
+  const product : IProductCard = {
     id: data.id,
     image: data.image,
     title: data.title,

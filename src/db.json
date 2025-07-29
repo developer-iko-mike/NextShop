@@ -127,6 +127,14 @@
       "gmail": "",
       "password": "9123456780",
       "basket": []
+    },
+    {
+      "id": "86b2",
+      "username": "ehsan88",
+      "phone": "9876543210",
+      "gmail": "ehsan8.8@gmail.com",
+      "password": "ehsan88",
+      "basket": []
     }
   ]
 }

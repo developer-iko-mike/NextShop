@@ -8,7 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useUserStore } from "@/Components/contexts/authUser";
 import CustomToast from "@/Components/CustomToast";
-import { UserForm } from "../register/page";
+import { User } from "@/Components/types";
 
 const Login = () => {
   const { setUser } = useUserStore();
@@ -24,15 +24,15 @@ const Login = () => {
     }),
     onSubmit: async ({ loginId, password }) => {
       try {
-        const handleCheckPassword = (product: UserForm) =>
-          product.password === password;
+        const handleCheckPassword = (user: User) =>
+          user.password === password;
         const { data } = await axios("http://localhost:3001/users");
         const usernameAuth =
-          data.filter((item: UserForm) => item.username === loginId)[0] || null;
+          data.filter((item: User) => item.username === loginId)[0] || null;
         const phoneAuth =
-          data.filter((item: UserForm) => item.phone === loginId)[0] || null;
+          data.filter((item: User) => item.phone === loginId)[0] || null;
         const emailAuth =
-          data.filter((item: UserForm) => item.gmail === loginId)[0] || null;
+          data.filter((item: User) => item.gmail === loginId)[0] || null;
         if (Boolean(usernameAuth) && handleCheckPassword(usernameAuth)) {
           setUser(usernameAuth)
           toast.success("you are login now with usernameAuth", {
@@ -121,7 +121,7 @@ const Login = () => {
             )}
           </div>
           <div className="flex justify-center gap-2.5">
-            <p className="capitalize">don't have account ? </p>
+            <p className="capitalize">don{"'t"} have account ? </p>
             <Link
               href="/register"
               className="text-sky-400 hover:underline hover:text-sky-600"

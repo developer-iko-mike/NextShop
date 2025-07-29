@@ -5,11 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import CustomToast from "./CustomToast";
 
-export interface IID {
-  id: string;
-}
-
-const AddToBasketButton = ({ id }: IID) => {
+const AddToBasketButton = ({ id }: {id: string}) => {
   const { addProduct } = useBasket();
 
   const handleAdd = (id: string) => {

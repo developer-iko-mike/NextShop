@@ -1,16 +1,10 @@
 "use client";
-import React, { useState, ChangeEvent, FormEvent } from "react";
+import React, { useState, FormEvent } from "react";
 import Container from "@/Components/Container";
 import { toast, ToastContainer } from "react-toastify";
 import CustomToast from "@/Components/CustomToast";
 import axios from "axios";
-
-interface ProductForm {
-  title: string;
-  caption: string;
-  price: string;
-  image: string;
-}
+import { Che, ProductForm } from "@/Components/types";
 
 const AdminPanel = () => {
   const [form, setForm] = useState<ProductForm>({
@@ -20,7 +14,7 @@ const AdminPanel = () => {
     image: "",
   });
 
-  const handleChange = (e: ChangeEvent | ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: Che) => {
     const { name, value } = e.target;
     setForm({
       ...form,
@@ -115,7 +109,6 @@ const AdminPanel = () => {
           </div>
           <div>
             <textarea
-              type="text"
               name="caption"
               placeholder="Enter product caption"
               value={form.caption}

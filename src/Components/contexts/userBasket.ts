@@ -1,10 +1,8 @@
 import { create } from "zustand";
 import { persist, devtools } from "zustand/middleware";
+import { IProduct } from "../types";
 
-export interface IProduct {
-  id: string;
-  qty: number;
-}
+
 
 interface IStore {
   basket: IProduct[];

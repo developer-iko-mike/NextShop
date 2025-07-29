@@ -1,14 +1,6 @@
 import { create } from 'zustand';
 import { persist, devtools } from 'zustand/middleware';
-
-interface User {
-  id: string;
-  username: string;
-  phone: string;
-  gmail: string;
-  password: string;
-  basket: any[]; // یا تعریف دقیق‌تر برای آیتم‌های سبد خرید
-}
+import { User } from '@/Components/types';
 
 interface UserState {
   user: User | null;

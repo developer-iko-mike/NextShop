@@ -2,21 +2,12 @@
 import React, { useEffect, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
-import { IProductCard } from "@/Components/ProductCard";
-import useStoreBasket, { IProduct } from "@/Components/contexts/userBasket";
+import { IProduct, ICartItem, IDiscount } from "@/Components/types";
+import useStoreBasket from "@/Components/contexts/userBasket";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
 
-export interface ICartItem extends IProductCard {
-  quantity: number;
-}
-
-export interface IDiscount {
-  id: string;
-  code: string;
-  precentCount: number;
-}
 
 const Cart = () => {
   const { basket, clearBasket } = useStoreBasket();

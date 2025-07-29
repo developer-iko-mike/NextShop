@@ -1,12 +1,7 @@
 import React from "react";
+import IProductCard from "./types";
 
-export interface IProductCard {
-  id: string;
-  image: string | File;
-  title: string;
-  caption: string;
-  price: number;
-}
+
 
 const ProductCard = ({ title, caption, price, image }: IProductCard) => {
   return (
