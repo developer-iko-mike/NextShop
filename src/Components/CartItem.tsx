@@ -8,7 +8,7 @@ const CartItem = ({
   caption,
   price,
   image,
-  quantity,
+  qty,
 }: ICartItem) => {
   const { increaseQty, decreaseQty, removeFromBasket } = useUserStore();
 
@@ -29,9 +29,9 @@ const CartItem = ({
             <p className="text-sm font-medium text-black mt-1">
               $
               {typeof price === "number"
-                ? (price * quantity).toFixed(2)
+                ? (price * qty).toFixed(2)
                 : "0.00"}{" "}
-              ×{quantity}
+              ×{qty}
             </p>
           </div>
         </div>
@@ -51,7 +51,7 @@ const CartItem = ({
             –
           </button>
           <span className="w-6 text-center text-black font-semibold">
-            {quantity}
+            {qty}
           </span>
           <button
             className="w-8 h-8 rounded-full bg-green-100 hover:bg-green-200 text-green-600 text-lg font-bold flex items-center justify-around active:bg-green-300"

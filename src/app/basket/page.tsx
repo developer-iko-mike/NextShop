@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
 import { IProduct, ICartItem, IDiscount } from "@/Components/types";
@@ -17,7 +17,7 @@ const Cart = () => {
   const [finalTotal, setFinalTotal] = useState<number>(0);
 
   const calculatoringTotal = () =>
-    mainBasket.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    mainBasket.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   const getProductData = async () => {
     try {
@@ -31,7 +31,7 @@ const Cart = () => {
             if (dataItem) {
               return {
                 ...dataItem,
-                quantity: basketItem.qty,
+                qty: basketItem.qty,
               };
             }
             return null;
@@ -44,9 +44,11 @@ const Cart = () => {
     }
   };
 
-  useEffect(() => {
-    getProductData();
-  }, [user?.basket.length]);
+  const totalPrice = useMemo(() => calculatoringTotal(), [mainBasket]);
+
+useEffect(() => {
+  getProductData();
+}, [JSON.stringify(user?.basket)]);
 
   const userCodeValidation = async () => {
     if (discountCode) {
@@ -55,7 +57,7 @@ const Cart = () => {
       );
       const discountData: IDiscount = res.data[0];
       if (Boolean(discountData)) {
-        const beforeDiscountTotal: number = calculatoringTotal();
+        const beforeDiscountTotal: number = totalPrice;
         const calcingCashOff =
           beforeDiscountTotal * (discountData.precentCount / 100);
         const finalTotal = beforeDiscountTotal - calcingCashOff;
@@ -76,8 +78,23 @@ const Cart = () => {
   };
 
   const handleOrderedUser = async () => {
-    console.log(mainBasket);
-    clearBasket();
+      const res = await axios({
+        url: "http://localhost:3001/orders",
+        method: "POST",
+        data: {
+          orderItem: user?.basket,
+          username: user?.username,
+          phone: user?.phone,
+          email: user?.gmail,
+          status: "pending"
+        }
+      })
+      if (res.status === 201){
+        toast.success(`perfact your order is coming to your home (${res.data.status})` , {position: "bottom-right"})
+        clearBasket();
+      } else {
+        toast.error(`error in handle order user` , {position: "bottom-right"})
+      }
   };
 
   return (

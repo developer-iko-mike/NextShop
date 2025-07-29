@@ -44,7 +44,7 @@ export interface ProductForm {
 export type Che = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export interface ICartItem extends IProductCard {
-  quantity: number;
+  qty: number;
 }
 
 export interface IDiscount {
