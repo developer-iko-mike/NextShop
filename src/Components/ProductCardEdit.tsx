@@ -24,12 +24,17 @@ const ProductCard = ({ id, title, caption, price, image }: IProductItem) => {
     validationSchema: Yup.object({
       title: Yup.string().required("Title is required"),
       caption: Yup.string().required("Caption is required"),
-      price: Yup.number().typeError("Price must be a number").required("Price is required"),
+      price: Yup.number()
+        .typeError("Price must be a number")
+        .required("Price is required"),
       image: Yup.string().required("Image URL is required"),
     }),
     onSubmit: async (values) => {
       try {
-        const { status } = await axios.put(`http://localhost:3001/product/${id}`, values);
+        const { status } = await axios.put(
+          `http://localhost:3001/product/${id}`,
+          values
+        );
         if (status === 200) {
           Swal.fire({
             title: "Updated!",
@@ -167,21 +172,25 @@ const ProductCard = ({ id, title, caption, price, image }: IProductItem) => {
 
   const formRef = useRef<HTMLFormElement>(null);
 
-useEffect(() => {
-  function handleClickOutside(event: MouseEvent) {
-    if (formRef.current && !formRef.current.contains(event.target as Node)) {
-      setIsEditing(false);
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (formRef.current && !formRef.current.contains(event.target as Node)) {
+        setIsEditing(false);
+      }
     }
-  }
 
-  document.addEventListener("mousedown", handleClickOutside);
-  return () => {
-    document.removeEventListener("mousedown", handleClickOutside);
-  };
-}, []);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
-   <div className={`bg-white min-h-[344px] rounded-2xl shadow-md overflow-hidden transition-transform ${!isEditing && "hover:scale-105"}`}>
+    <div
+      className={`bg-white min-h-[344px] rounded-2xl shadow-md overflow-hidden transition-transform ${
+        !isEditing && "hover:scale-105"
+      }`}
+    >
       {isEditing ? (
         <form onSubmit={formik.handleSubmit} ref={formRef}>
           <div className="h-48 bg-gray-100 flex items-center justify-center relative">
@@ -199,7 +208,9 @@ useEffect(() => {
               className="absolute bottom-2 left-2 backdrop-blur-md bg-white/30 border-b-2 border-white/50 placeholder-white/70 rounded px-2 py-1 outline-none"
             />
             {formik.touched.image && formik.errors.image && (
-              <div className="text-red-500 text-xs absolute bottom-0 left-2">{formik.errors.image}</div>
+              <div className="text-red-500 text-xs absolute bottom-0 left-2">
+                {formik.errors.image}
+              </div>
             )}
           </div>
           <div className="p-4">
@@ -224,7 +235,9 @@ useEffect(() => {
               placeholder="Caption"
             />
             {formik.touched.caption && formik.errors.caption && (
-              <div className="text-red-500 text-xs">{formik.errors.caption}</div>
+              <div className="text-red-500 text-xs">
+                {formik.errors.caption}
+              </div>
             )}
             <div className="flex items-center justify-between">
               <div className="flex">
@@ -239,7 +252,9 @@ useEffect(() => {
                   placeholder="Price"
                 />
                 {formik.touched.price && formik.errors.price && (
-                  <div className="text-red-500 text-xs">{formik.errors.price}</div>
+                  <div className="text-red-500 text-xs">
+                    {formik.errors.price}
+                  </div>
                 )}
               </div>
               <div className="flex justify-between text-white w-9/12 gap-1.5">
