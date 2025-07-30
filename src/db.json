@@ -16,7 +16,7 @@
     },
     {
       "id": "6",
-      "title": "Apple iPhone 15 Pro",
+      "title": "Apple iPhone 15 Pro Yellow",
       "caption": "Latest smartphone with A17 chip and Dynamic Island",
       "price": 1099,
       "image": "/store/iphone.png"
@@ -74,6 +74,20 @@
       "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
       "email": "amirQuf@gmail.com",
       "status": "pending"
+    },
+    {
+      "id": "6208",
+      "orderItem": [
+        {
+          "id": "6",
+          "qty": 1
+        }
+      ],
+      "username": "amirQuf",
+      "phone": "9876543210",
+      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
+      "email": "amirQuf@gmail.com",
+      "status": "pending"
     }
   ],
   "users": [
@@ -91,9 +105,28 @@
       "username": "amirQuf",
       "phone": "9876543210",
       "gmail": "amirQuf@gmail.com",
-      "password": "456456",
+      "password": "amir2007",
       "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
       "basket": []
+    },
+    {
+      "id": "59b3",
+      "username": "reza",
+      "phone": "9012345678",
+      "gmail": "rezza@gmail.com",
+      "password": "48624862",
+      "address": "Iran, mashhad, ahmad abad, Fereshteh Street, No. 15, Unit 1",
+      "basket": []
+    }
+  ],
+  "admins": [
+    {
+      "id": "1",
+      "gmail": "developer.iko.mike@gmail.com"
+    },
+    {
+      "id": "2",
+      "gmail": "amirQuf@gmail.com"
     }
   ]
 }

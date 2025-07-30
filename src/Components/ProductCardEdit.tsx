@@ -1,16 +1,16 @@
 "use client";
 import React, { ReactNode, useEffect, useRef, useState } from "react";
-import IProductCard, { ProductForm } from "./types";
+import BasketItemCard, { ProductForm } from "./types";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-interface IProductItem extends IProductCard {
+interface BasketItemItem extends BasketItemCard {
   children?: ReactNode;
 }
 
-const ProductCard = ({ id, title, caption, price, image }: IProductItem) => {
+const ProductCard = ({ id, title, caption, price, image }: BasketItemItem) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const formik = useFormik<ProductForm>({

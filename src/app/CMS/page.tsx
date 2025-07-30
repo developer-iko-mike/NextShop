@@ -70,7 +70,8 @@ const AdminPanel = () => {
         <h1 className="text-3xl font-extrabold mb-8 text-gray-800">
           Add New Product
         </h1>
-        <CMSQuiz title="Need Edit Or Delete Product ?" href="/CMS/edit-delete"/>
+        <CMSQuiz title="Need Edit Or Delete Product ?" href="/CMS/edit-delete" mb="mb-3"/>
+        <CMSQuiz title="Need Watch Orders ?" href="/CMS/orders"/>
         <form
           onSubmit={handleSubmit}
           className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg space-y-6"

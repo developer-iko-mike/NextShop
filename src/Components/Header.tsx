@@ -4,18 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Container from "./Container";
 import useStoreBasket from "./stores/useUserStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { IAdmin } from "./types";
 
 interface INavItems {
   name: string;
   href: string;
 }
-
-const navItems: INavItems[] = [
-  { name: "Home", href: "/" },
-  { name: "Store", href: "/store" },
-  { name: "Admin Panel", href: "/CMS" },
-];
 
 export const modalBackdrop = {
   hidden: { opacity: 0 },
@@ -50,7 +46,10 @@ export const modalContent: Variants = {
 };
 export default function Navbar() {
   const [showLogoutModal, setShowLogoutModal] = useState(false);
-
+  const [navItems, setNavItems] = useState<INavItems[]>([
+    { name: "Home", href: "/" },
+    { name: "Store", href: "/store" },
+  ]);
 
   const buttonVariant: Variants = {
     initial: {
@@ -88,6 +87,27 @@ export default function Navbar() {
   // Helper to determine if nav link is active
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
+
+  useEffect(() => {
+    const checkUserIsAdmin = async () => {
+      if (user) {
+        const { data } = await axios("http://localhost:3001/admins");
+        const isAdmin = data.find((item: IAdmin) => item.gmail === user?.gmail);
+
+        if (isAdmin) {
+          setNavItems((prev) => {
+            const alreadyExists = prev.some((item) => item.href === "/CMS");
+            if (!alreadyExists) {
+              return [...prev, { name: "Admin Panel", href: "/CMS" } , {name: "Edit Or Delete Product" , href: "/CMS/edit-delete"} , {name: "View Orders", href: "/CMS/orders"}];
+            }
+            return prev;
+          });
+        }
+      }
+    };
+
+    checkUserIsAdmin();
+  }, [user]);
 
   return (
     <motion.header

@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
-import IProductCard from "./types";
+import BasketItemCard from "./types";
 
-interface IProductItem extends IProductCard {
+interface BasketItemItem extends BasketItemCard {
   children?: ReactNode;
 }
 
@@ -11,7 +11,7 @@ const ProductCard = ({
   price,
   image,
   children,
-}: IProductItem) => {
+}: BasketItemItem) => {
   return (
     <div className="bg-white min-h-[344px] rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform">
       <div className="h-48 bg-gray-100 flex items-center justify-center">

@@ -1,5 +1,5 @@
 import Container from "@/Components/Container";
-import  IProductCard from "@/Components/types";
+import  BasketItemCard from "@/Components/types";
 import AddToBasketButton from "@/Components/AddToBasketButton"
 
 export default async function ProductDetailPage({
@@ -9,7 +9,7 @@ export default async function ProductDetailPage({
   const res = await fetch(`http://localhost:3001/product/${id}`);
   const data = await res.json();
   
-  const product : IProductCard = {
+  const product : BasketItemCard = {
     id: data.id,
     image: data.image,
     title: data.title,

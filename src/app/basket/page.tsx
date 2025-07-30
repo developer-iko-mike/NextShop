@@ -2,11 +2,12 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
-import { IProduct, ICartItem, IDiscount } from "@/Components/types";
+import { BasketItem, ICartItem, IDiscount } from "@/Components/types";
 import useUserStore from "@/Components/stores/useUserStore";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
+import { getProductData } from "@/Components/utiles";
 
 const Cart = () => {
   const { user, clearBasket } = useUserStore();
@@ -19,35 +20,42 @@ const Cart = () => {
   const calculatoringTotal = () =>
     mainBasket.reduce((sum, item) => sum + item.price * item.qty, 0);
 
-  const getProductData = async () => {
-    try {
-      const res = await axios.get("http://localhost:3001/product");
-      if (res.status === 200) {
-        const result = user?.basket
-          .map((basketItem: IProduct) => {
-            const dataItem = res.data.find(
-              (d: IProduct) => d.id === basketItem.id
-            );
-            if (dataItem) {
-              return {
-                ...dataItem,
-                qty: basketItem.qty,
-              };
-            }
-            return null;
-          })
-          .filter((item: ICartItem) => item !== null);
-        setMainBasket(result || []);
-      }
-    } catch (err) {
-      console.error("error in get product info:", err);
-    }
-  };
+  // const getProductData = async () => {
+  //   try {
+  //     const res = await axios.get("http://localhost:3001/product");
+  //     if (res.status === 200) {
+  //       const result = user?.basket
+  //         .map((basketItem: BasketItem) => {
+  //           const dataItem = res.data.find(
+  //             (d: BasketItem) => d.id === basketItem.id
+  //           );
+  //           if (dataItem) {
+  //             return {
+  //               ...dataItem,
+  //               qty: basketItem.qty,
+  //             };
+  //           }
+  //           return null;
+  //         })
+  //         .filter((item: ICartItem) => item !== null);
+  //       setMainBasket(result || []);
+  //     }
+  //   } catch (err) {
+  //     console.error("error in get product info:", err);
+  //   }
+  // };
 
   const totalPrice = useMemo(() => calculatoringTotal(), [mainBasket]);
 
 useEffect(() => {
-  getProductData();
+  const fetchData = async () => {
+    const resData = await getProductData({
+      basketDatas: user?.basket,
+    });
+    setMainBasket(resData || []);
+  };
+
+  fetchData();
 }, [JSON.stringify(user?.basket)]);
 
   const userCodeValidation = async () => {

@@ -30,7 +30,7 @@ const CartItem = ({
               $
               {typeof price === "number"
                 ? (price * qty).toFixed(2)
-                : "0.00"}{" "}
+                : "0.00"}
               ×{qty}
             </p>
           </div>

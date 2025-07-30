@@ -5,8 +5,7 @@ export type ChProps = Readonly<{ children: ReactNode; }>;
 export interface Ch { children: ReactNode; }
 export interface ChOptional { children?: ReactNode; }
 
-// component > store > ProductCard :
-interface IProductCard {
+interface BasketItemCard {
   id: string;
   image: string;
   title: string;
@@ -14,6 +13,8 @@ interface IProductCard {
   price: number;
   qty: number;
 }
+
+export type ProductData = Omit<User, "qty">;
 
 export interface BasketItem {
   id: string;
@@ -31,11 +32,6 @@ export interface User {
   basket: BasketItem[];
 }
 
-export interface IProduct {
-  id: string;
-  qty: number;
-}
-
 export interface ProductForm {
   title: string;
   caption: string;
@@ -45,7 +41,7 @@ export interface ProductForm {
 
 export type Che = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-export interface ICartItem extends IProductCard { qty: number; }
+export interface ICartItem extends BasketItemCard { qty: number; }
 
 export interface IDiscount {
   id: string;
@@ -58,4 +54,21 @@ export interface UserForm {
   password: string;
 }
 
-export default IProductCard;
+export type Product = {
+  id: string;
+  orderItem: BasketItem[];
+  username: string;
+  phone: string;
+  address: string;
+  email: string;
+  status: "pending" | "shipped" | "delivered" | "cancelled";
+};
+
+export type OrderListProps = { products: Product[]; };
+
+export interface IAdmin {
+  id: string;
+  gmail: string;
+}
+
+export default BasketItemCard;

@@ -3,7 +3,7 @@ import ProductCard from "@/Components/ProductCard";
 import Container from "@/Components/Container";
 import Link from "next/link";
 import axios from "axios";
-import IProductCard from "@/Components/types";
+import BasketItemCard from "@/Components/types";
 
 const ProductsPage = async () => {
   const response = await axios.get("http://localhost:3001/product");
@@ -15,7 +15,7 @@ const ProductsPage = async () => {
           My Product 🛒
         </h1>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {response.data.map((product: IProductCard) => (
+          {response.data.map((product: BasketItemCard) => (
             <Link key={product.id} href={`/store/${product.id}`}>
               <ProductCard {...product} />
             </Link>
