@@ -1,5 +1,5 @@
 import React from "react";
-import ProductCard from "@/Components/ProductCard";
+import ProductCardEdit from "@/Components/ProductCardEdit";
 import Container from "@/Components/Container";
 import axios from "axios";
 import IProductCard from "@/Components/types";
@@ -20,9 +20,7 @@ const EditDelete = async () => {
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {response.data.map((product: IProductCard) => (
-            <ProductCard key={product.id} {...product} >
-              <DeleteEdit productID={product.id}/>
-            </ProductCard>
+            <ProductCardEdit key={product.id} {...product} />
           ))}
         </div>
       </div>

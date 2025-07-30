@@ -9,9 +9,12 @@ import * as Yup from "yup";
 import useUserStore from "@/Components/stores/useUserStore";
 import CustomToast from "@/Components/CustomToast";
 import { User } from "@/Components/types";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
   const { setUser } = useUserStore();
+
+  const router = useRouter();
 
   const formik = useFormik({
     initialValues: {
@@ -22,10 +25,9 @@ const Login = () => {
       loginId: Yup.string().min(3).max(40).required("Required"),
       password: Yup.string().min(5).max(16).required("Required"),
     }),
-    onSubmit: async ({ loginId, password }) => {
+    onSubmit: async ({ loginId, password }, { resetForm }) => {
       try {
-        const handleCheckPassword = (user: User) =>
-          user.password === password;
+        const handleCheckPassword = (user: User) => user.password === password;
         const { data } = await axios("http://localhost:3001/users");
         const usernameAuth =
           data.filter((item: User) => item.username === loginId)[0] || null;
@@ -34,26 +36,51 @@ const Login = () => {
         const emailAuth =
           data.filter((item: User) => item.gmail === loginId)[0] || null;
         if (Boolean(usernameAuth) && handleCheckPassword(usernameAuth)) {
-          setUser(usernameAuth)
-          toast.success(<CustomToast title="you are login now with usernameAuth" TiTleLink="view store" href="/store"/>, {
-            position: "bottom-right",
-            autoClose: 3000,
-            draggable: true,
-          });
+          setUser(usernameAuth);
+          toast.success(
+            <CustomToast
+              title="you are login now with usernameAuth"
+              TiTleLink="view store"
+              href="/store"
+            />,
+            {
+              position: "bottom-right",
+              autoClose: 3000,
+              draggable: true,
+            }
+          );
+          resetForm();
+          setTimeout(() => {
+            router.push("/store");
+          }, 2500);
         } else if (Boolean(phoneAuth) && handleCheckPassword(phoneAuth)) {
-          setUser(phoneAuth)
-          toast.success(<CustomToast title="you are login now with phoneAuth" TiTleLink="view store" href="/store"/>, {
-            position: "bottom-right",
-            autoClose: 3000,
-            draggable: true,
-          });
+          setUser(phoneAuth);
+          toast.success(
+            <CustomToast
+              title="you are login now with phoneAuth"
+              TiTleLink="view store"
+              href="/store"
+            />,
+            {
+              position: "bottom-right",
+              autoClose: 3000,
+              draggable: true,
+            }
+          );
         } else if (Boolean(emailAuth) && handleCheckPassword(emailAuth)) {
-          setUser(emailAuth)
-          toast.success(<CustomToast title="you are login now with emailAuth" TiTleLink="view store" href="/store"/>, {
-            position: "bottom-right",
-            autoClose: 3000,
-            draggable: true,
-          });
+          setUser(emailAuth);
+          toast.success(
+            <CustomToast
+              title="you are login now with emailAuth"
+              TiTleLink="view store"
+              href="/store"
+            />,
+            {
+              position: "bottom-right",
+              autoClose: 3000,
+              draggable: true,
+            }
+          );
         } else {
           toast.error("your email or password is wrong or now alavid", {
             position: "bottom-right",

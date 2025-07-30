@@ -1,21 +1,14 @@
 import { ChangeEvent, ReactNode } from "react";
 
-export type ChProps = Readonly<{
-  children: ReactNode;
-}>;
+export type ChProps = Readonly<{ children: ReactNode; }>;
 
-export interface Ch {
-  children: ReactNode;
-}
-
-export interface ChOptional {
-  children?: ReactNode;
-}
+export interface Ch { children: ReactNode; }
+export interface ChOptional { children?: ReactNode; }
 
 // component > store > ProductCard :
 interface IProductCard {
   id: string;
-  image: string | File;
+  image: string;
   title: string;
   caption: string;
   price: number;
@@ -34,6 +27,7 @@ export interface User {
   phone: string;
   gmail: string;
   password: string;
+  address: string;
   basket: BasketItem[];
 }
 
@@ -45,15 +39,13 @@ export interface IProduct {
 export interface ProductForm {
   title: string;
   caption: string;
-  price: string;
+  price: number | string;
   image: string;
 }
 
 export type Che = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-export interface ICartItem extends IProductCard {
-  qty: number;
-}
+export interface ICartItem extends IProductCard { qty: number; }
 
 export interface IDiscount {
   id: string;

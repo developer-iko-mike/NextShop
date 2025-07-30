@@ -85,6 +85,7 @@ useEffect(() => {
           orderItem: user?.basket,
           username: user?.username,
           phone: user?.phone,
+          address: user?.address,
           email: user?.gmail,
           status: "pending"
         }

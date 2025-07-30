@@ -7,9 +7,12 @@ import Link from "next/link";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import useUserStore from "@/Components/stores/useUserStore";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const { setUser } = useUserStore();
+
+  const router = useRouter()
 
   const formik = useFormik({
     initialValues: {
@@ -17,6 +20,7 @@ const Register = () => {
       phone: "",
       gmail: "",
       password: "",
+      address: "",
     },
     validationSchema: Yup.object({
       username: Yup.string()
@@ -33,18 +37,27 @@ const Register = () => {
         .min(6, "Minimum 6 characters required")
         .max(16, "Maximum 16 characters allowed")
         .required("Password is required"),
+      address: Yup.string()
+        .min(35, "Minimum 35 characters required")
+        .max(200, "Maximum 200 characters allowed")
+        .required("address for send your order is required"),
     }),
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       try {
         const res = await axios.post("http://localhost:3001/users", {
           ...values,
           basket: [],
         });
         setUser(res.data);
-        toast.success("Registration completed successfully!", {
+        
+        toast.success("Registration completed successfully! redirect you to store page", {
           position: "bottom-right",
-          autoClose: 3000,
+          autoClose: 2500,
         });
+        resetForm()
+        setTimeout(() => {
+          router.push("/store")
+        }, 2500)
       } catch (err) {
         toast.error("There was a problem with registration", {
           position: "bottom-right",
@@ -126,6 +139,17 @@ const Register = () => {
               <p className={errorClass}>{formik.errors.password}</p>
             )}
           </div>
+            <div>
+            <textarea
+              name="address"
+              placeholder="Enter your full address : iran , Fars, Shiraz , Maaliabad District , Daneshjoo , Boulevard, No. 18"
+              value={formik.values.address}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              className="w-full px-4 py-2 border border-sky-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
+            />
+          </div>
 
           <div className="flex justify-center gap-2.5 text-sm">
             <p>Already have an account?</p>
@@ -136,7 +160,7 @@ const Register = () => {
 
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700"
+            className="w-full bg-blue-600 text-white py-2 rounded-lg font-semibold hover:bg-blue-700 cursor-pointer"
           >
             Register
           </button>
