@@ -2,15 +2,28 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
-import { BasketItem, ICartItem, IDiscount } from "@/Components/types";
+import { ICartItem, IDiscount } from "@/Components/types";
 import useUserStore from "@/Components/stores/useUserStore";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
-import { getProductData, ourl } from "@/Components/utiles";
+import { getProductData, ourl, uurl } from "@/Components/utiles";
 
 const Cart = () => {
   const { user, clearBasket } = useUserStore();
+
+  useEffect(() => {
+    const setUserStoreBasketInUserBasket = async () => {
+      if (Boolean(user)) {
+        console.log("user?.id", user);
+        const res = await axios.patch(uurl + `/${user?.id}`, {
+          basket: user?.basket || [],
+        });
+        console.log("res", res);
+      }
+    };
+    setUserStoreBasketInUserBasket();
+  }, []);
 
   const [mainBasket, setMainBasket] = useState<ICartItem[]>([]);
   const [discountCode, setDiscountCode] = useState<string>("");
@@ -22,16 +35,16 @@ const Cart = () => {
 
   const totalPrice = useMemo(() => calculatoringTotal(), [mainBasket]);
 
-useEffect(() => {
-  const fetchData = async () => {
-    const resData = await getProductData({
-      basketDatas: user?.basket,
-    });
-    setMainBasket(resData || []);
-  };
+  useEffect(() => {
+    const fetchData = async () => {
+      const resData = await getProductData({
+        basketDatas: user?.basket,
+      });
+      setMainBasket(resData || []);
+    };
 
-  fetchData();
-}, [JSON.stringify(user?.basket)]);
+    fetchData();
+  }, [JSON.stringify(user?.basket)]);
 
   const userCodeValidation = async () => {
     if (discountCode) {
@@ -61,24 +74,27 @@ useEffect(() => {
   };
 
   const handleOrderedUser = async () => {
-      const res = await axios({
-        url: ourl,
-        method: "POST",
-        data: {
-          orderItem: user?.basket,
-          username: user?.username,
-          phone: user?.phone,
-          address: user?.address,
-          email: user?.gmail,
-          status: "pending"
-        }
-      })
-      if (res.status === 201){
-        toast.success(`perfact your order is coming to your home (${res.data.status})` , {position: "bottom-right"})
-        clearBasket();
-      } else {
-        toast.error(`error in handle order user` , {position: "bottom-right"})
-      }
+    const res = await axios({
+      url: ourl,
+      method: "POST",
+      data: {
+        orderItem: user?.basket,
+        username: user?.username,
+        phone: user?.phone,
+        address: user?.address,
+        email: user?.gmail,
+        status: "pending",
+      },
+    });
+    if (res.status === 201) {
+      toast.success(
+        `perfact your order is coming to your home (${res.data.status})`,
+        { position: "bottom-right" }
+      );
+      clearBasket();
+    } else {
+      toast.error(`error in handle order user`, { position: "bottom-right" });
+    }
   };
 
   return (

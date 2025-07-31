@@ -85,30 +85,47 @@ export default function Navbar() {
   const pathname = usePathname();
   const { user, logout } = useStoreBasket();
 
-  // Helper to determine if nav link is active
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-  useEffect(() => {
-    const checkUserIsAdmin = async () => {
-      if (user) {
-        const { data } = await axios(aurl);
-        const isAdmin = data.find((item: IAdmin) => item.gmail === user?.gmail);
+useEffect(() => {
+  const checkIfUserIsAdmin = async () => {
+    try {
+      if (!user?.gmail) return;
 
-        if (isAdmin) {
-          setNavItems((prev) => {
-            const alreadyExists = prev.some((item) => item.href === "/CMS");
-            if (!alreadyExists) {
-              return [...prev, { name: "Admin Panel", href: "/CMS" } , {name: "Edit Or Delete Product" , href: "/CMS/edit-delete"} , {name: "View Orders", href: "/CMS/orders"}];
-            }
-            return prev;
-          });
-        }
+      const response = await axios.get(aurl);
+      console.log("response.data:", response.data); // اینجا آرایه ادمین‌هاست
+      const admins = response.data; // چون خود response.data آرایه است
+
+      const isAdmin = admins.some(
+        (admin: { gmail: string }) => admin.gmail === user.gmail
+      );
+
+      if (isAdmin) {
+        localStorage.setItem("email", user.gmail);
+
+        setNavItems((prev: INavItems[]) => {
+          const exists = prev.some((item) => item.href === "/CMS");
+          if (!exists) {
+            return [
+              ...prev,
+              { name: "Admin Panel", href: "/CMS" },
+              { name: "Edit Or Delete Product", href: "/CMS/edit-delete" },
+              { name: "View Orders", href: "/CMS/orders" },
+            ];
+          }
+          return prev;
+        });
+      } else {
+        localStorage.removeItem("email");
       }
-    };
+    } catch (error) {
+      console.error("Error checking admin status:", error);
+    }
+  };
 
-    checkUserIsAdmin();
-  }, [user]);
+  checkIfUserIsAdmin();
+}, [user]);
 
   return (
     <motion.header
