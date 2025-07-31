@@ -48,20 +48,6 @@
   ],
   "orders": [
     {
-      "id": "2313",
-      "orderItem": [
-        {
-          "id": "9",
-          "qty": 2
-        }
-      ],
-      "username": "amirQuf",
-      "phone": "9876543210",
-      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
-      "email": "amirQuf@gmail.com",
-      "status": "pending"
-    },
-    {
       "id": "e6f0",
       "orderItem": [
         {
@@ -73,21 +59,7 @@
       "phone": "9876543210",
       "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
       "email": "amirQuf@gmail.com",
-      "status": "pending"
-    },
-    {
-      "id": "6208",
-      "orderItem": [
-        {
-          "id": "6",
-          "qty": 1
-        }
-      ],
-      "username": "amirQuf",
-      "phone": "9876543210",
-      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
-      "email": "amirQuf@gmail.com",
-      "status": "pending"
+      "status": "cancelled"
     }
   ],
   "users": [

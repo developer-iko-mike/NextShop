@@ -6,6 +6,7 @@ import CustomToast from "@/Components/CustomToast";
 import axios from "axios";
 import { Che, ProductForm } from "@/Components/types";
 import CMSQuiz from "@/Components/CMSQuiz";
+import purl from "@/Components/utiles";
 
 const AdminPanel = () => {
   const [form, setForm] = useState<ProductForm>({
@@ -33,7 +34,7 @@ const AdminPanel = () => {
       });
     } else {
       await axios({
-        url: "http://localhost:3001/product",
+        url: purl,
         method: "POST",
         data: {
           title: form.title,

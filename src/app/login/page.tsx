@@ -10,6 +10,7 @@ import useUserStore from "@/Components/stores/useUserStore";
 import CustomToast from "@/Components/CustomToast";
 import { User } from "@/Components/types";
 import { useRouter } from "next/navigation";
+import { uurl } from "@/Components/utiles";
 
 const Login = () => {
   const { setUser } = useUserStore();
@@ -28,7 +29,7 @@ const Login = () => {
     onSubmit: async ({ loginId, password }, { resetForm }) => {
       try {
         const handleCheckPassword = (user: User) => user.password === password;
-        const { data } = await axios("http://localhost:3001/users");
+        const { data } = await axios(uurl);
         const usernameAuth =
           data.filter((item: User) => item.username === loginId)[0] || null;
         const phoneAuth =

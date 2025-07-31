@@ -1,6 +1,13 @@
 // utiles.ts
 import axios from "axios";
 import { BasketItem, ICartItem, ProductData } from "./types";
+import { useRouter } from "next/navigation";
+
+const purl = "http://localhost:3001/product"
+export const durl = "http://localhost:3001/discount"
+export const ourl = "http://localhost:3001/orders"
+export const uurl = "http://localhost:3001/users"
+export const aurl = "http://localhost:3001/admins"
 
 export interface IGetProductData {
   basketDatas: BasketItem[]; // ✅ آرایه باشه
@@ -8,7 +15,7 @@ export interface IGetProductData {
 
 export const getProductData = async ({ basketDatas }: IGetProductData) => {
   try {
-    const res = await axios.get("http://localhost:3001/product");
+    const res = await axios.get(purl);
 
     if (!Array.isArray(basketDatas) || basketDatas.length === 0) {
       console.log("❌ basketDatas is empty or invalid");
@@ -31,3 +38,5 @@ export const getProductData = async ({ basketDatas }: IGetProductData) => {
     return [];
   }
 };
+
+export default purl;

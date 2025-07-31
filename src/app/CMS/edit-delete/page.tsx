@@ -4,9 +4,10 @@ import Container from "@/Components/Container";
 import axios from "axios";
 import BasketItemCard from "@/Components/types";
 import CMSQuiz from "@/Components/CMSQuiz";
+import purl from "@/Components/utiles";
 
 const EditDelete = async () => {
-  const response = await axios.get("http://localhost:3001/product");
+  const response = await axios.get(purl);
 
   return (
     <Container>

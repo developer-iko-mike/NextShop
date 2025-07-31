@@ -7,6 +7,7 @@ import useStoreBasket from "./stores/useUserStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { IAdmin } from "./types";
+import { aurl } from "./utiles";
 
 interface INavItems {
   name: string;
@@ -91,7 +92,7 @@ export default function Navbar() {
   useEffect(() => {
     const checkUserIsAdmin = async () => {
       if (user) {
-        const { data } = await axios("http://localhost:3001/admins");
+        const { data } = await axios(aurl);
         const isAdmin = data.find((item: IAdmin) => item.gmail === user?.gmail);
 
         if (isAdmin) {

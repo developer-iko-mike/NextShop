@@ -7,7 +7,7 @@ import useUserStore from "@/Components/stores/useUserStore";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
 import Link from "next/link";
-import { getProductData } from "@/Components/utiles";
+import { getProductData, ourl } from "@/Components/utiles";
 
 const Cart = () => {
   const { user, clearBasket } = useUserStore();
@@ -19,31 +19,6 @@ const Cart = () => {
 
   const calculatoringTotal = () =>
     mainBasket.reduce((sum, item) => sum + item.price * item.qty, 0);
-
-  // const getProductData = async () => {
-  //   try {
-  //     const res = await axios.get("http://localhost:3001/product");
-  //     if (res.status === 200) {
-  //       const result = user?.basket
-  //         .map((basketItem: BasketItem) => {
-  //           const dataItem = res.data.find(
-  //             (d: BasketItem) => d.id === basketItem.id
-  //           );
-  //           if (dataItem) {
-  //             return {
-  //               ...dataItem,
-  //               qty: basketItem.qty,
-  //             };
-  //           }
-  //           return null;
-  //         })
-  //         .filter((item: ICartItem) => item !== null);
-  //       setMainBasket(result || []);
-  //     }
-  //   } catch (err) {
-  //     console.error("error in get product info:", err);
-  //   }
-  // };
 
   const totalPrice = useMemo(() => calculatoringTotal(), [mainBasket]);
 
@@ -87,7 +62,7 @@ useEffect(() => {
 
   const handleOrderedUser = async () => {
       const res = await axios({
-        url: "http://localhost:3001/orders",
+        url: ourl,
         method: "POST",
         data: {
           orderItem: user?.basket,

@@ -4,9 +4,10 @@ import Container from "@/Components/Container";
 import Link from "next/link";
 import axios from "axios";
 import BasketItemCard from "@/Components/types";
+import purl from "@/Components/utiles";
 
 const ProductsPage = async () => {
-  const response = await axios.get("http://localhost:3001/product");
+  const response = await axios.get(purl);
 
   return (
     <Container>

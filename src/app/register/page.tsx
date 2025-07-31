@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import useUserStore from "@/Components/stores/useUserStore";
 import { useRouter } from "next/navigation";
+import { uurl } from "@/Components/utiles";
 
 const Register = () => {
   const { setUser } = useUserStore();
@@ -44,7 +45,7 @@ const Register = () => {
     }),
     onSubmit: async (values, { resetForm }) => {
       try {
-        const res = await axios.post("http://localhost:3001/users", {
+        const res = await axios.post(uurl, {
           ...values,
           basket: [],
         });
