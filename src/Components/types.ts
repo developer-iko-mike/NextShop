@@ -71,4 +71,14 @@ export interface IAdmin {
   gmail: string;
 }
 
+export interface IProps {
+  params: Promise<null | { id : string} >;
+  searchParams: Promise<{page: string; per_page: string;}>;
+}
+
+export interface Props {
+  params: { id: string };
+  searchParams?: Record<string, string | string[] | undefined>;
+}
+
 export default BasketItemCard;

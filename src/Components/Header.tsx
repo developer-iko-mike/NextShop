@@ -88,44 +88,26 @@ export default function Navbar() {
   const isActive = (href: string) =>
     href === "/" ? pathname === "/" : pathname.startsWith(href);
 
-useEffect(() => {
-  const checkIfUserIsAdmin = async () => {
-    try {
-      if (!user?.gmail) return;
+  useEffect(() => {
+    const checkUserIsAdmin = async () => {
+      if (user) {
+        const { data } = await axios(aurl);
+        const isAdmin = data.find((item: IAdmin) => item.gmail === user?.gmail);
 
-      const response = await axios.get(aurl);
-      console.log("response.data:", response.data); // اینجا آرایه ادمین‌هاست
-      const admins = response.data; // چون خود response.data آرایه است
-
-      const isAdmin = admins.some(
-        (admin: { gmail: string }) => admin.gmail === user.gmail
-      );
-
-      if (isAdmin) {
-        localStorage.setItem("email", user.gmail);
-
-        setNavItems((prev: INavItems[]) => {
-          const exists = prev.some((item) => item.href === "/CMS");
-          if (!exists) {
-            return [
-              ...prev,
-              { name: "Admin Panel", href: "/CMS" },
-              { name: "Edit Or Delete Product", href: "/CMS/edit-delete" },
-              { name: "View Orders", href: "/CMS/orders" },
-            ];
-          }
-          return prev;
-        });
-      } else {
-        localStorage.removeItem("email");
+        if (isAdmin) {
+          setNavItems((prev) => {
+            const alreadyExists = prev.some((item) => item.href === "/CMS");
+            if (!alreadyExists) {
+              return [...prev, { name: "Admin Panel", href: "/CMS" } , {name: "Edit Or Delete Product" , href: "/CMS/edit-delete"} , {name: "View Orders", href: "/CMS/orders"}];
+            }
+            return prev;
+          });
+        }
       }
-    } catch (error) {
-      console.error("Error checking admin status:", error);
-    }
-  };
+    };
 
-  checkIfUserIsAdmin();
-}, [user]);
+    checkUserIsAdmin();
+  }, [user]);
 
   return (
     <motion.header

@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
-import { ICartItem, IDiscount } from "@/Components/types";
+import { ICartItem, IDiscount , Product } from "@/Components/types";
 import useUserStore from "@/Components/stores/useUserStore";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -37,7 +37,7 @@ const Cart = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const resData = await getProductData({
+      const resData = await getProductData<{basketDatas: Product}>({
         basketDatas: user?.basket,
       });
       setMainBasket(resData || []);

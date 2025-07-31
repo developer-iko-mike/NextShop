@@ -1,7 +1,6 @@
 // utiles.ts
 import axios from "axios";
 import { BasketItem, ICartItem, ProductData } from "./types";
-import { useRouter } from "next/navigation";
 
 const purl = "http://localhost:3001/product"
 export const durl = "http://localhost:3001/discount"

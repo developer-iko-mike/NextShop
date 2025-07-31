@@ -1,25 +1,60 @@
 {
   "product": [
     {
-      "title": "mouse",
-      "caption": "fast mouse",
-      "price": 29,
-      "image": "/store/mouse.png",
-      "id": "3"
+      "id": "1",
+      "title": "Apple AirPods Pro",
+      "caption": "Noise-cancelling wireless earbuds",
+      "price": 249,
+      "image": "/store/airpad.webp"
     },
     {
+      "id": "2",
+      "title": "Xiaomi Mi Band 7",
+      "caption": "Smart fitness tracker with heart rate monitor",
+      "price": 49,
+      "image": "/store/band.webp"
+    },
+    {
+      "id": "3",
+      "title": "Gaming Case",
+      "caption": "4090 8gb , 32gb ram 4 canal , i9 14990",
+      "price": 29,
+      "image": "/store/case.webp"
+    },
+    {
+      "id": "4",
+      "title": "Sony WH-1000XM4",
+      "caption": "Over-ear noise-cancelling headphones",
+      "price": 349,
+      "image": "/store/headphone.webp"
+    },
+    {
+      "id": "5",
       "title": "MacBook Air M2",
       "caption": "Powerful and lightweight Apple laptop",
-      "image": "/store/laptop.webp",
       "price": 1199,
-      "id": "5"
+      "image": "/store/laptop.webp"
     },
     {
       "id": "6",
-      "title": "Apple iPhone 15 Pro Yellow",
+      "title": "Apple iPhone 15 Pro",
       "caption": "Latest smartphone with A17 chip and Dynamic Island",
       "price": 1099,
       "image": "/store/iphone.png"
+    },
+    {
+      "id": "7",
+      "title": "TP-Link WiFi 6 Modem",
+      "caption": "High-speed dual-band wireless modem router",
+      "price": 89,
+      "image": "/store/modem.webp"
+    },
+    {
+      "id": "8",
+      "title": "Logitech MX Master 3S",
+      "caption": "Advanced wireless mouse with ergonomic design",
+      "price": 99,
+      "image": "/store/mouse.png"
     },
     {
       "id": "9",
@@ -27,6 +62,13 @@
       "caption": "Next-gen gaming console with DualSense controller",
       "price": 499,
       "image": "/store/ps5.webp"
+    },
+    {
+      "id": "10",
+      "title": "Apple Watch Series 9",
+      "caption": "Smartwatch with health tracking and GPS",
+      "price": 399,
+      "image": "/store/watch.webp"
     }
   ],
   "discount": [
@@ -46,22 +88,7 @@
       "precentCount": 30
     }
   ],
-  "orders": [
-    {
-      "id": "e6f0",
-      "orderItem": [
-        {
-          "id": "3",
-          "qty": 1
-        }
-      ],
-      "username": "amirQuf",
-      "phone": "9876543210",
-      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
-      "email": "amirQuf@gmail.com",
-      "status": "cancelled"
-    }
-  ],
+  "orders": [],
   "users": [
     {
       "id": "03b8",
@@ -70,7 +97,20 @@
       "gmail": "developer.iko.mike@gmail.com",
       "password": "123123",
       "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
-      "basket": []
+      "basket": [
+        {
+          "id": "1",
+          "qty": 1
+        },
+        {
+          "id": "7",
+          "qty": 1
+        },
+        {
+          "id": "4",
+          "qty": 1
+        }
+      ]
     },
     {
       "id": "5dcd",

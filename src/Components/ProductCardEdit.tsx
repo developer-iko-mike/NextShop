@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import axios from "axios";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import purl, { ourl } from "./utiles";
 
 interface BasketItemItem extends BasketItemCard {
   children?: ReactNode;
@@ -119,14 +120,14 @@ const ProductCard = ({ id, title, caption, price, image }: BasketItemItem) => {
       if (result.isConfirmed) {
         try {
           const { status } = await axios.delete(
-            `http://localhost:3001/product/${id}`
+            purl + `/${id}`
           );
           if (status === 200) {
             Swal.fire({
               title: "Deleted!",
               text: "The product has been successfully deleted.",
               icon: "success",
-              timer: 3000,
+              timer: 1500,
               timerProgressBar: true,
               showConfirmButton: false,
               buttonsStyling: false,

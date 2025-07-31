@@ -3,11 +3,19 @@ import ProductCard from "@/Components/ProductCard";
 import Container from "@/Components/Container";
 import Link from "next/link";
 import axios from "axios";
-import BasketItemCard from "@/Components/types";
+import BasketItemCard, { IProps } from "@/Components/types";
 import purl from "@/Components/utiles";
+import { log } from "console";
 
-const ProductsPage = async () => {
-  const response = await axios.get(purl);
+const ProductsPage = async ({searchParams: {page , per_page}} : IProps) => {
+
+  const nowPage = await page ?? "1"
+  const perPage = await per_page ?? "8"
+
+  
+  const response = await axios.get(purl + `?_page=${nowPage}&_per_page=${perPage}`);
+  console.log(`page: ${nowPage} , perPage: ${perPage}`)
+  log('url:', response.request.path)
 
   return (
     <Container>
@@ -16,7 +24,7 @@ const ProductsPage = async () => {
           My Product 🛒
         </h1>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {response.data.map((product: BasketItemCard) => (
+          {response.data.data.map((product: BasketItemCard) => (
             <Link key={product.id} href={`/store/${product.id}`}>
               <ProductCard {...product} />
             </Link>
