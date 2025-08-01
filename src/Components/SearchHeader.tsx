@@ -1,17 +1,33 @@
+import axios from "axios";
 import { motion } from "framer-motion";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import purl, { handleFilterDataWithTiTle } from "./utiles";
+import { IProductData } from "./types";
 
 export default function FancyForm() {
   const [value, setValue] = useState("");
   const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter()
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Submitted: ${value}`);
+    
+    if (!value) return toast.error("input value is empty " , {position: "bottom-right"});
+    if (value.length < 3) return toast.error("input value is min length 3" , {position: "bottom-right"});
+    if (value.length > 30) return toast.error("input value is max length 30" , {position: "bottom-right"});
+
+    const filtredData = await handleFilterDataWithTiTle(value)
+
+    if (!filtredData.length) return toast.error("your product is not definded" , {position: "bottom-right"});
+    
+    router.push(`/search?title=${value}`)
   };
 
   return (
     <form onSubmit={handleSubmit} className="flex justify-center items-center bg-gradient-to-br">
+      <ToastContainer/>
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 40 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}

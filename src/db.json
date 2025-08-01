@@ -29,11 +29,11 @@
       "image": "/store/headphone.webp"
     },
     {
-      "id": "5",
       "title": "MacBook Air M2",
       "caption": "Powerful and lightweight Apple laptop",
       "price": 1199,
-      "image": "/store/laptop.webp"
+      "image": "/store/iphone.png",
+      "id": "5"
     },
     {
       "id": "6",
@@ -81,7 +81,44 @@
       "precentCount": 30
     }
   ],
-  "orders": [],
+  "orders": [
+    {
+      "id": "a096",
+      "orderItem": {
+        "id": "3",
+        "qty": 1
+      },
+      "username": "MohammadiKO",
+      "phone": "9057792234",
+      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
+      "email": "developer.iko.mike@gmail.com",
+      "status": "cancelled"
+    },
+    {
+      "id": "003a",
+      "orderItem": {
+        "id": "5",
+        "qty": 1
+      },
+      "username": "MohammadiKO",
+      "phone": "9057792234",
+      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
+      "email": "developer.iko.mike@gmail.com",
+      "status": "shipped"
+    },
+    {
+      "id": "95e7",
+      "orderItem": {
+        "id": "8",
+        "qty": 1
+      },
+      "username": "MohammadiKO",
+      "phone": "9057792234",
+      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
+      "email": "developer.iko.mike@gmail.com",
+      "status": "shipped"
+    }
+  ],
   "users": [
     {
       "id": "03b8",
@@ -90,20 +127,7 @@
       "gmail": "developer.iko.mike@gmail.com",
       "password": "123123",
       "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
-      "basket": [
-        {
-          "id": "1",
-          "qty": 1
-        },
-        {
-          "id": "7",
-          "qty": 1
-        },
-        {
-          "id": "4",
-          "qty": 1
-        }
-      ]
+      "basket": []
     },
     {
       "id": "5dcd",

@@ -43,6 +43,8 @@ export type Che = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
 export interface ICartItem extends BasketItemCard { qty: number; }
 
+export type IProductData = Omit<BasketItemCard, "qty">;
+
 export interface IDiscount {
   id: string;
   code: string;
@@ -56,7 +58,7 @@ export interface UserForm {
 
 export type Product = {
   id: string;
-  orderItem: BasketItem[];
+  orderItem: BasketItem;
   username: string;
   phone: string;
   address: string;
@@ -69,6 +71,11 @@ export type OrderListProps = { products: Product[]; };
 export interface IAdmin {
   id: string;
   gmail: string;
+}
+
+export interface ISProps {
+    params: Promise<null | { id : string} >;
+  searchParams: Promise<{title: string;}>;
 }
 
 export interface IProps {

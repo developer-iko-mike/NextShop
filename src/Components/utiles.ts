@@ -1,6 +1,6 @@
 // utiles.ts
 import axios from "axios";
-import { BasketItem, ICartItem, ProductData } from "./types";
+import { BasketItem, ICartItem, IProductData, ProductData } from "./types";
 
 const purl = "http://localhost:3001/product"
 export const durl = "http://localhost:3001/discount"
@@ -9,7 +9,7 @@ export const uurl = "http://localhost:3001/users"
 export const aurl = "http://localhost:3001/admins"
 
 export interface IGetProductData {
-  basketDatas: BasketItem[]; // ✅ آرایه باشه
+  basketDatas: BasketItem[];
 }
 
 export const getProductData = async ({ basketDatas }: IGetProductData) => {
@@ -37,5 +37,11 @@ export const getProductData = async ({ basketDatas }: IGetProductData) => {
     return [];
   }
 };
+
+export const handleFilterDataWithTiTle = async (title : string) => {
+    const {data} = await axios(purl)
+    const filtredData = data.filter((product: IProductData) => product.title.toLowerCase().includes(title.toLowerCase()))
+    return filtredData;
+}
 
 export default purl;
