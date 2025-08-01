@@ -6,11 +6,13 @@ import axios from "axios";
 import BasketItemCard, { IProps } from "@/Components/types";
 import purl from "@/Components/utiles";
 import { log } from "console";
+import ProductPagination from "@/Components/ProductPagination";
 
-const ProductsPage = async ({searchParams: {page , per_page}} : IProps) => {
+const ProductsPage = async (props : IProps) => {
 
-  const nowPage = await page ?? "1"
-  const perPage = await per_page ?? "8"
+  const nowPage = await props.searchParams.page ?? "1"
+  const perPage = await props.searchParams.per_page ?? "8"
+  // const searchTiTle = await props.searchParams.per_page ?? ""
 
   
   const response = await axios.get(purl + `?_page=${nowPage}&_per_page=${perPage}`);
@@ -30,6 +32,7 @@ const ProductsPage = async ({searchParams: {page , per_page}} : IProps) => {
             </Link>
           ))}
         </div>
+        <ProductPagination allPageCount={response.data.pages} pageDisplay={perPage}/>
       </div>
     </Container>
   );

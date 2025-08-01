@@ -6,6 +6,7 @@ const Layout = ({children}: ChProps) => {
   return (
     <>
         <Header/>
+        <div className='pt-[5.125rem]'/>
         {children}
     </>
   );

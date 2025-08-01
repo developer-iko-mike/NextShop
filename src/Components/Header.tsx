@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { IAdmin } from "./types";
 import { aurl } from "./utiles";
+import SearchHeader from "@/Components/SearchHeader";
 
 interface INavItems {
   name: string;
@@ -98,7 +99,12 @@ export default function Navbar() {
           setNavItems((prev) => {
             const alreadyExists = prev.some((item) => item.href === "/CMS");
             if (!alreadyExists) {
-              return [...prev, { name: "Admin Panel", href: "/CMS" } , {name: "Edit Or Delete Product" , href: "/CMS/edit-delete"} , {name: "View Orders", href: "/CMS/orders"}];
+              return [
+                ...prev,
+                { name: "Admin Panel", href: "/CMS" },
+                { name: "Edit Or Delete Product", href: "/CMS/edit-delete" },
+                { name: "View Orders", href: "/CMS/orders" },
+              ];
             }
             return prev;
           });
@@ -114,10 +120,10 @@ export default function Navbar() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full bg-white shadow-md"
+      className="w-full bg-white/95 shadow-md fixed top-0 z-50 w-[90.5rem]"
     >
       <Container>
-        <nav className="flex items-center justify-between py-4">
+        <nav className="flex items-center justify-between py-4 ">
           {/* Navigation Links */}
           <div className="flex items-center space-x-6">
             {navItems.map(({ name, href }) => (
@@ -135,6 +141,8 @@ export default function Navbar() {
               </Link>
             ))}
           </div>
+
+          <SearchHeader />
 
           <div className="flex items-center space-x-4 relative">
             <div className="relative">

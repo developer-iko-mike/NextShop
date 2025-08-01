@@ -10,7 +10,6 @@ const ProductCard = ({
   caption,
   price,
   image,
-  children,
 }: BasketItemItem) => {
   return (
     <div className="bg-white min-h-[344px] rounded-2xl shadow-md overflow-hidden hover:scale-105 transition-transform">
@@ -22,7 +21,6 @@ const ProductCard = ({
         <p className="text-gray-600 my-2">{caption}</p>
         <div className="flex items-center justify-between">
           <span className="text-lg font-semibold text-green-600">${price}</span>
-          {children ? <>{children}</> : null}
         </div>
       </div>
     </div>

@@ -62,13 +62,6 @@
       "caption": "Next-gen gaming console with DualSense controller",
       "price": 499,
       "image": "/store/ps5.webp"
-    },
-    {
-      "id": "10",
-      "title": "Apple Watch Series 9",
-      "caption": "Smartwatch with health tracking and GPS",
-      "price": 399,
-      "image": "/store/watch.webp"
     }
   ],
   "discount": [
