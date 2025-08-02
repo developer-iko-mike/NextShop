@@ -1,6 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { ChProps } from './types';
+import { ToastContainer } from 'react-toastify';
 
 const Layout = ({children}: ChProps) => {
   return (

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Layout from "@/Components/Layout";
 import { ChProps } from "@/Components/types";
+import "react-toastify/dist/ReactToastify.css";
 
 export const metadata: Metadata = {
   title: "LeachStore",

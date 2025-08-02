@@ -37,7 +37,7 @@ const Cart = () => {
 
   useEffect(() => {
     if (!user?.basket?.length) {
-      toast.warning("سبد خرید شما خالیه!", {
+      toast.warning("Your basket is empty!", {
         position: "bottom-right",
         autoClose: 3000,
       });
@@ -111,7 +111,7 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 pt-10">
-      <ToastContainer />
+      <ToastContainer autoClose={3000} />
       <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6">
         <h2 className="text-2xl font-bold text-black mb-6">🛒 Shopping Cart</h2>
 

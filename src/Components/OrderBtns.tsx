@@ -49,7 +49,7 @@ useEffect(() => {
       const res = await axios.patch(ourl + `/${id}`, { status: statusNow, });
       console.log(res);
     } catch (error) {
-      console.error("خطا در آپدیت سفارش:", error);
+      console.error("error in update order:", error);
     }    
   }
 
@@ -77,7 +77,7 @@ useEffect(() => {
       const res = await axios.delete(ourl + `/${id}`);
       console.log(res);
     } catch (error) {
-      console.error("خطا در حذف سفارش:", error);
+      console.error("error in delete order:", error);
     }    
   }
 
@@ -92,10 +92,10 @@ useEffect(() => {
       scale: 1.05,
       transition: { repeat: Infinity, repeatType: "reverse", duration: 0.5 },
     },
-  };
+  } as const;
 
   return (
-    <div className="flex flex-wrap gap-2 mt-auto pt-4 pb-4">
+    <div className="flex flex-wrap gap-2 pt-4">
       <AnimatePresence mode="wait">
         {isDeliveredClicked ? null : isAcceptClicked ? (
           <motion.button
