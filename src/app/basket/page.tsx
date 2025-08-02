@@ -1,11 +1,11 @@
 "use client";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
 import { BasketItem, ICartItem, IDiscount, Product } from "@/Components/types";
 import useUserStore from "@/Components/stores/useUserStore";
 import axios from "axios";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import Link from "next/link";
 import { getProductData, ourl, uurl } from "@/Components/utiles";
 
@@ -35,12 +35,15 @@ const Cart = () => {
 
   const totalPrice = useMemo(() => calculatoringTotal(), [mainBasket]);
 
-  useEffect(() => {
-    if (!user?.basket?.length) {
-      toast.warning("Your basket is empty!", {
-        position: "bottom-right",
-        autoClose: 3000,
-      });
+const hasShownEmptyToast = useRef(false);
+
+useEffect(() => {
+  if (!user?.basket?.length && !hasShownEmptyToast.current) {
+    toast.warning("Your basket is empty!", {
+      position: "bottom-right",
+      autoClose: 3000,
+    });
+    hasShownEmptyToast.current = true;
       return;
     }
 
@@ -93,9 +96,11 @@ const Cart = () => {
       },
     });
     if (res.status === 201) {
-      toast.success(
-        `perfact your order ${res.data.orderItem} is coming to your home (${res.data.status})`,
-        { position: "bottom-right" }
+      toast.success("Add to pending Order successfully!",
+        {
+          position: "bottom-right",
+          autoClose: 3000,
+        }
       );
       clearBasket();
     } else {
@@ -111,7 +116,6 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen bg-gray-100 pt-10">
-      <ToastContainer autoClose={3000} />
       <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-2xl p-6">
         <h2 className="text-2xl font-bold text-black mb-6">🛒 Shopping Cart</h2>
 

@@ -8,14 +8,16 @@ import purl from "@/Components/utiles";
 import { log } from "console";
 import ProductPagination from "@/Components/ProductPagination";
 
-const ProductsPage = async (props : IProps) => {
+const ProductsPage = async (props: IProps) => {
+  const searchParams = await props.searchParams;
+  const nowPage = searchParams?.page ?? "1";
+  const perPage = searchParams?.per_page ?? "8";
 
-  const nowPage = await props.searchParams.page ?? "1"
-  const perPage = await props.searchParams.per_page ?? "8"
-  
-  const response = await axios.get(purl + `?_page=${nowPage}&_per_page=${perPage}`);
-  console.log(`page: ${nowPage} , perPage: ${perPage}`)
-  log('url:', response.request.path)
+  const response = await axios.get(
+    purl + `?_page=${nowPage}&_per_page=${perPage}`
+  );
+  console.log(`page: ${nowPage} , perPage: ${perPage}`);
+  log("url:", response.request.path);
 
   return (
     <Container>
@@ -30,7 +32,11 @@ const ProductsPage = async (props : IProps) => {
             </Link>
           ))}
         </div>
-        <ProductPagination allPageCount={response.data.pages} pageDisplay={perPage}/>
+        <ProductPagination
+          baseUrl="/store"
+          allPageCount={response.data.pages}
+          pageDisplay={perPage}
+        />
       </div>
     </Container>
   );

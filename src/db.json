@@ -55,6 +55,13 @@
       "caption": "Next-gen gaming console with DualSense controller",
       "price": 499,
       "image": "/store/ps5.webp"
+    },
+    {
+      "id": "e768",
+      "title": "tv",
+      "caption": "43 inch big tv lorem ipsum iolrem ipsum lorem ipsum",
+      "price": 2000,
+      "image": "/newProduct/tv.webp"
     }
   ],
   "discount": [
@@ -76,42 +83,6 @@
   ],
   "orders": [
     {
-      "id": "003a",
-      "orderItem": {
-        "id": "5",
-        "qty": 1
-      },
-      "username": "MohammadiKO",
-      "phone": "9057792234",
-      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
-      "email": "developer.iko.mike@gmail.com",
-      "status": "shipped"
-    },
-    {
-      "id": "8b09",
-      "orderItem": {
-        "id": "4",
-        "qty": 1
-      },
-      "username": "amirQuf",
-      "phone": "9876543210",
-      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
-      "email": "amirQuf@gmail.com",
-      "status": "delivered"
-    },
-    {
-      "id": "b7a3",
-      "orderItem": {
-        "id": "8",
-        "qty": 1
-      },
-      "username": "amirQuf",
-      "phone": "9876543210",
-      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
-      "email": "amirQuf@gmail.com",
-      "status": "cancelled"
-    },
-    {
       "id": "a0e9",
       "orderItem": {
         "id": "2",
@@ -121,6 +92,30 @@
       "phone": "9012345678",
       "address": "Iran, mashhad, ahmad abad, Fereshteh Street, No. 15, Unit 1",
       "email": "rezza@gmail.com",
+      "status": "pending"
+    },
+    {
+      "id": "fa7c",
+      "orderItem": {
+        "id": "6",
+        "qty": 1
+      },
+      "username": "MohammadiKO",
+      "phone": "9057792234",
+      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
+      "email": "developer.iko.mike@gmail.com",
+      "status": "cancelled"
+    },
+    {
+      "id": "ecb9",
+      "orderItem": {
+        "id": "8",
+        "qty": 2
+      },
+      "username": "MohammadiKO",
+      "phone": "9057792234",
+      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
+      "email": "developer.iko.mike@gmail.com",
       "status": "pending"
     }
   ],
@@ -132,7 +127,12 @@
       "gmail": "developer.iko.mike@gmail.com",
       "password": "123123",
       "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
-      "basket": []
+      "basket": [
+        {
+          "id": "8",
+          "qty": 2
+        }
+      ]
     },
     {
       "id": "5dcd",

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { toast, ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import { handleFilterDataWithTiTle } from "./utiles";
 
 export default function FancyForm() {
@@ -25,7 +25,6 @@ export default function FancyForm() {
 
   return (
     <form onSubmit={handleSubmit} className="flex justify-center items-center bg-gradient-to-br">
-      <ToastContainer/>
       <motion.div
         initial={{ opacity: 0, scale: 0.95, y: 40 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}

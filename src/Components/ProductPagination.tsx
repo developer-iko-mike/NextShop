@@ -9,17 +9,19 @@ import purl from "./utiles";
 interface IProductPagination {
   allPageCount: string;
   pageDisplay: string;
+  baseUrl: string;
 }
 
 const ProductPagination = ({
   allPageCount,
   pageDisplay,
+  baseUrl,
 }: IProductPagination) => {
-  const router = useRouter()
+  const router = useRouter();
   const handlePageClick = ({ selected }: { selected: number }) => {
     const nowPage = selected + 1;
 
-    router.push(`/store?_page=${nowPage}&_per_page=${pageDisplay}`);
+    router.push(`${baseUrl}?page=${nowPage}&per_page=${pageDisplay}`);
   };
 
   return (
@@ -34,8 +36,18 @@ const ProductPagination = ({
               whileTap={{ scale: 0.95 }}
             >
               Next
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
               </svg>
             </motion.span>
           }
@@ -45,8 +57,18 @@ const ProductPagination = ({
               whileHover={{ scale: 1.08, color: "#2563eb" }}
               whileTap={{ scale: 0.95 }}
             >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M15 19l-7-7 7-7"
+                />
               </svg>
               Prev
             </motion.span>

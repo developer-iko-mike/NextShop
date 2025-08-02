@@ -5,9 +5,22 @@ import axios from "axios";
 import BasketItemCard from "@/Components/types";
 import CMSQuiz from "@/Components/CMSQuiz";
 import purl from "@/Components/utiles";
+import ProductPagination from "@/Components/ProductPagination";
 
-const EditDelete = async () => {
-  const response = await axios.get(purl);
+interface Props {
+  searchParams?: {
+    page?: string;
+    per_page?: string;
+  };
+}
+
+const EditDelete = async ({ searchParams }: Props) => {
+  const nowPage = searchParams?.page ?? "1";
+  const perPage = searchParams?.per_page ?? "8";
+
+  const response = await axios.get(
+    `${purl}?_page=${nowPage}&_per_page=${perPage}`
+  );
 
   return (
     <Container>
@@ -16,13 +29,19 @@ const EditDelete = async () => {
           My Product 🛒
         </h1>
 
-        <CMSQuiz title="need add new product ?" href="/CMS"/>
+        <CMSQuiz title="need add new product ?" href="/CMS" />
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {response.data.map((product: BasketItemCard) => (
+          {response.data.data.map((product: BasketItemCard) => (
             <ProductCardEdit key={product.id} {...product} />
           ))}
         </div>
+
+        <ProductPagination
+          allPageCount={response.data.pages}
+          pageDisplay={perPage}
+          baseUrl="/CMS/edit-delete"
+        />
       </div>
     </Container>
   );
