@@ -2,7 +2,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import Container from "@/Components/Container";
 import CartItem from "@/Components/CartItem";
-import { BasketItem, ICartItem, IDiscount , Product } from "@/Components/types";
+import { BasketItem, ICartItem, IDiscount, Product } from "@/Components/types";
 import useUserStore from "@/Components/stores/useUserStore";
 import axios from "axios";
 import { toast, ToastContainer } from "react-toastify";
@@ -36,10 +36,16 @@ const Cart = () => {
   const totalPrice = useMemo(() => calculatoringTotal(), [mainBasket]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      const resData = await getProductData<{basketDatas: Product}>({
-        basketDatas: user?.basket,
+    if (!user?.basket?.length) {
+      toast.warning("سبد خرید شما خالیه!", {
+        position: "bottom-right",
+        autoClose: 3000,
       });
+      return;
+    }
+
+    const fetchData = async () => {
+      const resData = await getProductData({ basketDatas: user.basket });
       setMainBasket(resData || []);
     };
 
@@ -74,35 +80,33 @@ const Cart = () => {
   };
 
   const handleSubmitOrder = async (ubasket: BasketItem) => {
-      const res = await axios({
-        url: ourl,
-        method: "POST",
-        data: {
-          orderItem: ubasket,
-          username: user?.username,
-          phone: user?.phone,
-          address: user?.address,
-          email: user?.gmail,
-          status: "pending",
-        },
-      });
-      if (res.status === 201) {
-        toast.success(
-          `perfact your order ${res.data.orderItem} is coming to your home (${res.data.status})`,
-          { position: "bottom-right" }
-        );
-        clearBasket();
-      } else {
-        toast.error(`error in handle order user`, { position: "bottom-right" });
-      }    
-  }
+    const res = await axios({
+      url: ourl,
+      method: "POST",
+      data: {
+        orderItem: ubasket,
+        username: user?.username,
+        phone: user?.phone,
+        address: user?.address,
+        email: user?.gmail,
+        status: "pending",
+      },
+    });
+    if (res.status === 201) {
+      toast.success(
+        `perfact your order ${res.data.orderItem} is coming to your home (${res.data.status})`,
+        { position: "bottom-right" }
+      );
+      clearBasket();
+    } else {
+      toast.error(`error in handle order user`, { position: "bottom-right" });
+    }
+  };
 
   const handleOrderedUser = async () => {
-
-    user?.basket.map(item => {
-      handleSubmitOrder(item)
-    })
-    
+    user?.basket.map((item) => {
+      handleSubmitOrder(item);
+    });
   };
 
   return (

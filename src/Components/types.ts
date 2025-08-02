@@ -1,9 +1,13 @@
 import { ChangeEvent, ReactNode } from "react";
 
-export type ChProps = Readonly<{ children: ReactNode; }>;
+export type ChProps = Readonly<{ children: ReactNode }>;
 
-export interface Ch { children: ReactNode; }
-export interface ChOptional { children?: ReactNode; }
+export interface Ch {
+  children: ReactNode;
+}
+export interface ChOptional {
+  children?: ReactNode;
+}
 
 interface BasketItemCard {
   id: string;
@@ -41,7 +45,9 @@ export interface ProductForm {
 
 export type Che = ChangeEvent<HTMLInputElement | HTMLTextAreaElement>;
 
-export interface ICartItem extends BasketItemCard { qty: number; }
+export interface ICartItem extends BasketItemCard {
+  qty: number;
+}
 
 export type IProductData = Omit<BasketItemCard, "qty">;
 
@@ -66,7 +72,7 @@ export type Product = {
   status: "pending" | "shipped" | "delivered" | "cancelled";
 };
 
-export type OrderListProps = { products: Product[]; };
+export type OrderListProps = { products: Product[] };
 
 export interface IAdmin {
   id: string;
@@ -74,13 +80,18 @@ export interface IAdmin {
 }
 
 export interface ISProps {
-    params: Promise<null | { id : string} >;
-  searchParams: Promise<{title: string;}>;
+  params: Promise<null | { id: string }>;
+  searchParams: Promise<{ title: string }>;
 }
 
 export interface IProps {
-  params: Promise<null | { id : string} >;
-  searchParams: Promise<{page: string; per_page: string;}>;
+  params: Promise<null | { id?: string }>;
+  searchParams: Promise<{ page: string; per_page: string }>;
+}
+
+export interface IProps_id_status {
+  params: Promise<{ id?: string }>;
+  searchParams: Promise<{ status?: string }>;
 }
 
 export interface Props {
@@ -90,7 +101,7 @@ export interface Props {
 
 export interface IfilterItem {
   id: number | string;
-  title: string
+  title: string;
 }
 
 export default BasketItemCard;

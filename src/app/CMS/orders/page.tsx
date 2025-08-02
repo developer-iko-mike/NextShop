@@ -1,12 +1,12 @@
 import Container from "@/Components/Container";
 import FiltredOrder from "@/Components/FiltredOrder";
 import Order from "@/Components/Order";
-import { IProps } from "@/Components/types";
+import { IProps_id_status } from "@/Components/types";
 import React from "react";
 
-const Orders = async ({searchParams} : IProps) => {
+const Orders = async ({searchParams} : IProps_id_status) => {
 
-  const Searchparametr = await searchParams
+  const Searchparametr = await searchParams;
 
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 md:px-8 lg:px-16">
