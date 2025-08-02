@@ -12,8 +12,6 @@ const ProductsPage = async (props : IProps) => {
 
   const nowPage = await props.searchParams.page ?? "1"
   const perPage = await props.searchParams.per_page ?? "8"
-  // const searchTiTle = await props.searchParams.per_page ?? ""
-
   
   const response = await axios.get(purl + `?_page=${nowPage}&_per_page=${perPage}`);
   console.log(`page: ${nowPage} , perPage: ${perPage}`)

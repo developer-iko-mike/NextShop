@@ -88,4 +88,9 @@ export interface Props {
   searchParams?: Record<string, string | string[] | undefined>;
 }
 
+export interface IfilterItem {
+  id: number | string;
+  title: string
+}
+
 export default BasketItemCard;

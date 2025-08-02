@@ -1,10 +1,8 @@
-import axios from "axios";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast, ToastContainer } from "react-toastify";
-import purl, { handleFilterDataWithTiTle } from "./utiles";
-import { IProductData } from "./types";
+import { handleFilterDataWithTiTle } from "./utiles";
 
 export default function FancyForm() {
   const [value, setValue] = useState("");
@@ -18,7 +16,7 @@ export default function FancyForm() {
     if (value.length < 3) return toast.error("input value is min length 3" , {position: "bottom-right"});
     if (value.length > 30) return toast.error("input value is max length 30" , {position: "bottom-right"});
 
-    const filtredData = await handleFilterDataWithTiTle(value)
+    const filtredData = await handleFilterDataWithTiTle({title: value})
 
     if (!filtredData.length) return toast.error("your product is not definded" , {position: "bottom-right"});
     

@@ -38,8 +38,8 @@ export const getProductData = async ({ basketDatas }: IGetProductData) => {
   }
 };
 
-export const handleFilterDataWithTiTle = async (title : string) => {
-    const {data} = await axios(purl)
+export const handleFilterDataWithTiTle = async ({title , url = purl} : {title: string , url?: string}) => {
+    const {data} = await axios(url)
     const filtredData = data.filter((product: IProductData) => product.title.toLowerCase().includes(title.toLowerCase()))
     return filtredData;
 }

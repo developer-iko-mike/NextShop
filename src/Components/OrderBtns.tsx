@@ -129,7 +129,7 @@ useEffect(() => {
       </AnimatePresence>
 
       <AnimatePresence>
-        {isDeliveredClicked ? (
+        {isDeliveredClicked || isCancelClicked ? (
           <motion.button
             key="delete-btn"
             initial={{ opacity: 0, x: 20 }}

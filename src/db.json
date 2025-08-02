@@ -32,7 +32,7 @@
       "title": "MacBook Air M2",
       "caption": "Powerful and lightweight Apple laptop",
       "price": 1199,
-      "image": "/store/iphone.png",
+      "image": "/store/laptop.webp",
       "id": "5"
     },
     {
@@ -83,18 +83,6 @@
   ],
   "orders": [
     {
-      "id": "a096",
-      "orderItem": {
-        "id": "3",
-        "qty": 1
-      },
-      "username": "MohammadiKO",
-      "phone": "9057792234",
-      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
-      "email": "developer.iko.mike@gmail.com",
-      "status": "cancelled"
-    },
-    {
       "id": "003a",
       "orderItem": {
         "id": "5",
@@ -107,16 +95,40 @@
       "status": "shipped"
     },
     {
-      "id": "95e7",
+      "id": "8b09",
+      "orderItem": {
+        "id": "4",
+        "qty": 1
+      },
+      "username": "amirQuf",
+      "phone": "9876543210",
+      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
+      "email": "amirQuf@gmail.com",
+      "status": "delivered"
+    },
+    {
+      "id": "b7a3",
       "orderItem": {
         "id": "8",
         "qty": 1
       },
-      "username": "MohammadiKO",
-      "phone": "9057792234",
-      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
-      "email": "developer.iko.mike@gmail.com",
-      "status": "shipped"
+      "username": "amirQuf",
+      "phone": "9876543210",
+      "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
+      "email": "amirQuf@gmail.com",
+      "status": "cancelled"
+    },
+    {
+      "id": "a0e9",
+      "orderItem": {
+        "id": "2",
+        "qty": 1
+      },
+      "username": "reza",
+      "phone": "9012345678",
+      "address": "Iran, mashhad, ahmad abad, Fereshteh Street, No. 15, Unit 1",
+      "email": "rezza@gmail.com",
+      "status": "pending"
     }
   ],
   "users": [
@@ -136,7 +148,16 @@
       "gmail": "amirQuf@gmail.com",
       "password": "amir2007",
       "address": "Iran, Tehran, District 1, Elahieh, Fereshteh Street, No. 45, Unit 12",
-      "basket": []
+      "basket": [
+        {
+          "id": "4",
+          "qty": 1
+        },
+        {
+          "id": "8",
+          "qty": 1
+        }
+      ]
     },
     {
       "id": "59b3",
@@ -145,7 +166,12 @@
       "gmail": "rezza@gmail.com",
       "password": "48624862",
       "address": "Iran, mashhad, ahmad abad, Fereshteh Street, No. 15, Unit 1",
-      "basket": []
+      "basket": [
+        {
+          "id": "2",
+          "qty": 1
+        }
+      ]
     }
   ],
   "admins": [
