@@ -1,9 +1,9 @@
-import { BarLoader } from 'react-spinners';
+import { DotLoader } from 'react-spinners';
 
 const Loading = () => {
   return (
     <div className="loader-container flex justify-center items-center h-screen">
-      <BarLoader color="#36d7b7" loading={true} />
+      <DotLoader color="#36d7b7" loading={true} size={30} />
     </div>
   );
 };
