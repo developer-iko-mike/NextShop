@@ -35,19 +35,9 @@ const Cart = () => {
 
   const totalPrice = useMemo(() => calculatoringTotal(), [mainBasket]);
 
-const hasShownEmptyToast = useRef(false);
-
 useEffect(() => {
-  if (!user?.basket?.length && !hasShownEmptyToast.current) {
-    toast.warning("Your basket is empty!", {
-      position: "bottom-right",
-      autoClose: 3000,
-    });
-    hasShownEmptyToast.current = true;
-      return;
-    }
-
     const fetchData = async () => {
+      if (!user) return toast.warn("your basket is not loading or empty :[");
       const resData = await getProductData({ basketDatas: user.basket });
       setMainBasket(resData || []);
     };

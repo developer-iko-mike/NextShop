@@ -117,6 +117,18 @@
       "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
       "email": "developer.iko.mike@gmail.com",
       "status": "pending"
+    },
+    {
+      "id": "2ec0",
+      "orderItem": {
+        "id": "1",
+        "qty": 1
+      },
+      "username": "MohammadiKO",
+      "phone": "9057792234",
+      "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
+      "email": "developer.iko.mike@gmail.com",
+      "status": "shipped"
     }
   ],
   "users": [
@@ -129,11 +141,7 @@
       "address": "Russia, Moscow, Tversky street, building 12, apartment 34",
       "basket": [
         {
-          "id": "8",
-          "qty": 2
-        },
-        {
-          "id": "1",
+          "id": "3",
           "qty": 1
         }
       ]

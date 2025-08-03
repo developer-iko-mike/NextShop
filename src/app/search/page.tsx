@@ -10,7 +10,6 @@ const Search = async (props: ISProps) => {
 
     const {title} = await props.searchParams
     
-    
     const filtredData = await handleFilterDataWithTiTle({title})
 
     console.log(filtredData.length)
@@ -18,9 +17,6 @@ const Search = async (props: ISProps) => {
   return (
     <Container>
       <div className="min-h-screen px-6 py-10">
-        <h1 className="text-3xl font-bold text-gray-800 mb-8 text-center">
-          My Product 🛒
-        </h1>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {filtredData.map((product: BasketItemCard) => (
             <Link key={product.id} href={`/store/${product.id}`}>
