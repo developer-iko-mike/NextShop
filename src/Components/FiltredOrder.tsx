@@ -44,7 +44,7 @@ const FiltredOrder = () => {
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="flex flex-wrap justify-center gap-3 -mt-9"
+      className="flex flex-wrap justify-center gap-3"
     >
       <button
         onClick={() => handleFiltering("all")}

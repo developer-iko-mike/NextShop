@@ -37,7 +37,7 @@ const Cart = () => {
 
 useEffect(() => {
     const fetchData = async () => {
-      if (!user) return toast.warn("your basket is not loading or empty :[");
+      if (!user) return toast.warn("your basket is not loaded or empty :[");
       const resData = await getProductData({ basketDatas: user.basket });
       setMainBasket(resData || []);
     };
