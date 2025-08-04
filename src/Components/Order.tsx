@@ -1,16 +1,12 @@
 import React from "react";
-import axios from "axios";
 import { getProductData, ourl } from "./utiles";
-import { Product } from "./types";
 import OrderBtns from "./OrderBtns";
+import Image from "next/image";
+import { Product } from "./types";
 
-const OrderList = async ({ param }: { param: { status?: string } }) => {
-  const url = param?.status ? `${ourl}?status=${param.status}` : `${ourl}`;
-
-  const { data } = await axios.get<Product[]>(url);
+const OrderList = async (data  : Product[]) => {
 
   const allOrderItems = data.map((order) => order.orderItem);
-
   const productsData = await getProductData({ basketDatas: allOrderItems });
 
   return (
@@ -25,7 +21,7 @@ const OrderList = async ({ param }: { param: { status?: string } }) => {
               key={`${id}-${product.id}`}
               className="bg-white rounded-2xl shadow-md hover:shadow-lg transition-all duration-300 overflow-hidden flex flex-col md:flex-row h-[18.5rem]"
             >
-              <img
+              <Image
                 src={product.image}
                 alt={product.title}
                 className="w-full md:w-5/12 h-full object-contain"

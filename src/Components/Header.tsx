@@ -6,14 +6,9 @@ import Container from "./Container";
 import useStoreBasket from "./stores/useUserStore";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { IAdmin } from "./types";
+import { IAdmin, INavItems } from "./types";
 import { aurl } from "./utiles";
 import SearchHeader from "@/Components/SearchHeader";
-
-interface INavItems {
-  name: string;
-  href: string;
-}
 
 export const modalBackdrop = {
   hidden: { opacity: 0 },

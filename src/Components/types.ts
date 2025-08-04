@@ -2,6 +2,11 @@ import { ChangeEvent, ReactNode } from "react";
 
 export type ChProps = Readonly<{ children: ReactNode }>;
 
+export interface INavItems {
+  name: string;
+  href: string;
+}
+
 export interface Ch {
   children: ReactNode;
 }
